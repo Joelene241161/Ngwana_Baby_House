@@ -1,0 +1,257 @@
+:root {
+  --Primary-Yellow: #F7B731; /* global scope */
+  --Primary-Orange: #F26A21;
+  --Primary-Blue: #36B4E8;
+  --Primary-Grey: #BEC7D8;
+
+  --Secondary-Yellow-Shade: #E8A414;
+  --Secondary-Yellow-Tint: #FFDD96;
+  --Secondary-Yellow-Lightest_Tint: #FEEECD;
+
+
+  --Secondary-Orange-Shade: #B44D16;
+  --Secondary-Orange-Tint: #FFB89A;
+}
+
+/* Typescale */
+
+h1{
+    font-size: 6vw;
+    font-family: "Manrope", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
+}
+
+h2{
+    font-size: 52px;
+    font-family: "Manrope", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
+}
+
+h3{
+    font-size: 32px;
+    font-family: "Manrope", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+}
+
+h4{
+    font-size: 28px;
+    font-family: "Manrope", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+}
+
+h5{
+    font-size: 18px;
+    font-family: "Manrope", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+}
+
+h6{
+    font-size: 16px;
+    font-family: "Manrope", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
+}
+
+p{
+    font-size: 16px;
+    font-family: "Manrope", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
+}
+
+.buttonText{
+    font-size: 16px;
+    font-family: "Manrope", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
+}
+
+.secondaryButton{
+    background-color: var(--Secondary-Yellow-Shade);
+    color: white;
+    padding-left: 24px;
+    padding-right: 24px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    border-radius: 100px;
+    border: none;
+}
+
+.secondaryButton:hover{
+    background-color: var(--Secondary-Yellow-Tint);
+    color: var(--Secondary-Yellow-Shade);
+}
+
+.primaryButton{
+    background-color: var(--Primary-Orange);
+    color: white;
+    padding-left: 24px;
+    padding-right: 24px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    border-radius: 100px;
+    border: none;
+}
+
+.primaryButton:hover{
+   background-color: var(--Secondary-Orange-Tint); 
+   color: var(--Secondary-Orange-Shade);
+}
+
+/* logo animation */
+.logo {
+    display: block;
+    margin: auto;
+    margin-top: 15%;
+    animation-name: myAnimation;
+    animation-duration: 2s;
+    animation-timing-function: ease-in;
+}
+
+@keyframes myAnimation {
+    to {
+    transform: scale(2);
+  }
+  50%   {opacity: 100%;}
+  100%  {opacity: 0%;}
+}
+
+.background{
+    background-color: #FCF8F1;
+}
+
+/* Landing page */
+.backgroundImage{
+    background-image: url("Assets/landingPage.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+}
+
+.landingpageH1{
+    margin-left: 20%;
+    text-align: center;
+    margin-right: 20%;
+    padding-top: 3%;
+}
+
+.landingpageH4{
+    margin-left: 25%;
+    text-align: center;
+    margin-right: 25%;
+    padding-top: 1%;
+    padding-bottom: 1%;
+}
+
+.landingButton{
+    display: block;
+    margin: auto;
+    margin-top: 15px;
+}
+
+/* Signup and login pages */
+.backgroundImageSignup{
+    background-image: url("Assets/SignupBG.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+}
+
+input{
+    border-radius: 12px;
+    border: 1px solid var(--Primary-Grey);;
+    padding: 8px 8px;
+    width: 100%;
+}
+
+.block{
+    margin: auto;
+    border-radius: 24px;
+    background: var(--Secondary-Yellow-Lightest_Tint);
+    width: fit-content;
+    padding: 40px 40px;
+    justify-content: center;
+}
+
+.signupH5{
+    margin-top: 4%;
+    margin-bottom: 8%;
+}
+
+.spaceBetween{
+    margin-top: 3%;
+}
+
+.linkText{
+    color: var(--Primary-Orange);
+    padding-left: 4px;
+}
+
+/* The sidebar menu */
+.sidenav {
+  height: 100%;
+  width: fit-content;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #FFF;
+  overflow-x: hidden; /* Disable horizontal scroll */
+  padding-top: 20px;
+}
+
+/* The navigation menu links */
+.sidenav a {
+  padding: 12px 0px 6px 16px;
+  text-decoration: none;
+  font-size: 25px;
+  color: black;
+  display: block;
+}
+
+.noPadding{
+    padding: 0;
+}
+
+.sidenav a:hover {
+  color: var(--Secondary-Orange-Shade);
+}
+
+.sidebarLogo{
+width: 194px;
+height: 109px;
+padding: 5%;
+padding-left: 0;
+}
+
+.icon{
+    height: 24px;
+    padding-left: 20px;
+}
+
+/*
+Source - https://stackoverflow.com/a/58463573
+Posted by pasanjg, modified by community. See post 'Timeline' for change history
+Retrieved 2026-09-30, License - CC BY-SA 4.0
+*/
+
+@media only screen and (max-width: 1500px) {
+  #hide {
+    display: none;
+  }
+}
