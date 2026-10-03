@@ -13,6 +13,8 @@
   --Secondary-Orange-Tint: #FFB89A;
 
   --Secondary-Blue-Tint: #CAF0FF;
+  --Secondary-Blue: #70C4E6;
+  --Secondary-Blue-Shade: #14749B;
 }
 
 /* Typescale */
@@ -49,6 +51,11 @@ h4{
     font-style: normal;
 }
 
+.h4Bold{
+    font-weight: bold;
+    font-size: 24px;
+}
+
 h5{
     font-size: 18px;
     font-family: "Manrope", sans-serif;
@@ -71,6 +78,10 @@ p{
     font-optical-sizing: auto;
     font-weight: 700;
     font-style: normal;
+}
+
+.pLight{
+    font-weight: 400;
 }
 
 .buttonText{
@@ -123,6 +134,26 @@ p{
     border-radius: 100px;
     border: none;
     width: 100%;
+}
+
+.whiteButton:hover{
+    background-color: rgba(255, 255, 255, 0.812);
+}
+
+.tertiaryButton{
+    background-color: var(--Primary-Blue);
+    color: white;
+    padding-left: 24px;
+    padding-right: 24px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    border-radius: 100px;
+    border: none;
+}
+
+.tertiaryButton:hover{
+    background-color: var(--Secondary-Blue-Tint);
+    color: var(--Secondary-Blue-Shade);
 }
 
 /* logo animation */
@@ -272,7 +303,7 @@ Retrieved 2026-09-30, License - CC BY-SA 4.0
 
 /* home page */
 .main {
-  margin-left: 240px;
+  margin-left: 18%;
   padding: 0px 10px;
   margin-right: 4%;
   
@@ -317,7 +348,84 @@ Retrieved 2026-09-30, License - CC BY-SA 4.0
 .visitFeedback{
     background-color: var(--Secondary-Blue-Tint);
     border-radius: 24px;
-    width: 45%;
+    padding: 30px;
+    margin-top: 5%;
+    margin-right: 3%;
+    height: fit-content;
+    box-shadow: 0 4px 7px -4px rgba(0, 0, 0, 0.25);
+}
+
+.upcomingVisits{
+    background-image: url("Assets/Upcoming\ visits.png");
+    border-radius: 24px;
+    background-position: right;
+    background-size: cover;
     padding: 30px;
     margin-top: 2%;
+    width:100%;
+    box-shadow: 0 4px 7px -4px rgba(0, 0, 0, 0.25);
+}
+
+.badge{
+    margin-left:20dvh;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.visith6{
+    margin-top: 5%;
+    margin-bottom: 2%;
+}
+
+.marginTopSmall{
+    margin-top: 3%;
+    margin-bottom: 0;
+}
+
+.careRequests{
+    background-color: white;
+    border-radius: 24px;
+    padding: 30px;
+    margin-top: 5%;
+    margin-right: 3%;
+    height: fit-content;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 7px -4px rgba(0, 0, 0, 0.25);
+}
+
+.marginLeftSmall{
+    margin-left: 3%;
+}
+
+.careSuppliesText{
+    margin-top: 8%;
+    padding-left: 20px;
+    margin-bottom: 10px;
+}
+
+.vl {
+  border-left: 1.5px solid black;
+  height: 24px;
+}
+
+.quickActions{
+    background-color: white;
+    border-radius: 24px;
+    padding: 30px;
+    margin-top: 4%;
+    margin-right: 3%;
+    height: fit-content;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 7px -4px rgba(0, 0, 0, 0.25);
+}
+
+.linkAQuickAction{
+    color: var(--Primary-Blue);
+    padding-right: 15px;
+    padding-top: 2px;
+    text-decoration: none;
+}
+
+.linkAQuickAction:hover{
+    color: var(--Secondary-Blue);
 }

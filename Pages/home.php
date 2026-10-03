@@ -34,10 +34,10 @@
     <!-- nav links -->
   <div style="display: flex">
     <div> <a href="#" class="linkText">
-        <h4 class="navLinks activeLink">Tasks</h4>
+        <h5 class="navLinks activeLink">Tasks</h5>
     </a></div>
     <div> <a href="#" class="linkText">
-        <h4 class="navLinks">Supplies</h4>
+        <h5 class="navLinks">Supplies</h5>
     </a></div>
 </div>
 
@@ -48,20 +48,45 @@
 
 
 <div style="display: flex">
+    <div class="col-6">
     <div class="visitFeedback">
         <h3 class="minionPro"> Visit Feedback </h3>
         <p>Write feedback from the Ngwana family to a volunteer.</p>
         <button class="whiteButton buttonText">Write feedback</button>
     </div>
 
+    <div class="careRequests">
+        <div style="display: flex">
+            <h4 class="h4Bold"> Active care requests </h4>
+            <button class="tertiaryButton buttonText marginLeftSmall">Create a request <strong> &rarr;</strong></button>
+        </div>
+        <div>
+           
+    <!-- one care requests -->
+    <div style="display: flex">
+        <div><img src="../Assets/formula.png" alt="formula" style="width: 44px"></div>
+        <div> <p class="pLight careSuppliesText">Name of request</p> </div>
+    </div>
+    
+        </div>
+    </div>
+
+    </div>
+
     <div>
-        <h3 class="minionPro"> Visit Feedback </h3>
+        <h6 class="visith6"> Today </h6>
+            <div class="upcomingVisits">
+            <h3> Volunteer Name <span class="badge rounded-pill text-bg-light"><h6>Arrived</h6></span></h3>
+            <p>10 April, 10:00am-11:00am</p>
+            <button class="secondaryButton buttonText marginTopSmall">View visit details</button>
+            </div>
         
     </div>
 
-</div>
+</div> <!-- flex container -->
 
-    </div>
+
+    </div> <!-- main -->
     
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
