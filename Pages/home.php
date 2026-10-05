@@ -36,7 +36,7 @@
     <div> <a href="#" class="linkText">
         <h5 class="navLinks activeLink">Tasks</h5>
     </a></div>
-    <div> <a href="#" class="linkText">
+    <div> <a href="homeSupplies.php" class="linkText">
         <h5 class="navLinks">Supplies</h5>
     </a></div>
 </div>
@@ -58,13 +58,13 @@
     <div class="careRequests">
         <div style="display: flex">
             <h4 class="h4Bold"> Active care requests </h4>
-            <button class="tertiaryButton buttonText marginLeftSmall">Create a request <strong> &rarr;</strong></button>
+            <button class="tertiaryButton buttonText marginLeftSmall"><a href="homeSupplies.php" class="invisibleLink">Create a request &#10140;</a></button>
         </div>
         <div>
            
     <!-- one care requests -->
     <div style="display: flex">
-        <div><img src="../Assets/formula.png" alt="formula" style="width: 44px"></div>
+        <div><img src="../Assets/formula.png" alt="formula" style="width: 44px" class="imagePaddingTop"></div>
         <div> <p class="pLight careSuppliesText">Name of request</p> </div>
     </div>
     
