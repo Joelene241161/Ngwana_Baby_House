@@ -15,6 +15,8 @@
   --Secondary-Blue-Tint: #CAF0FF;
   --Secondary-Blue: #70C4E6;
   --Secondary-Blue-Shade: #14749B;
+
+  --Secondary-Grey-Tint: #eef2f8;
 }
 
 /* Typescale */
@@ -503,4 +505,58 @@ Retrieved 2026-09-30, License - CC BY-SA 4.0
 
 .paddingBottomSmall{
    margin-bottom: 20px; 
+}
+
+/* volunteer page */
+.listedVolunteer{
+    background-color: var(--Secondary-Yellow-Tint);
+    border-radius: 24px;
+    padding: 15px 30px;
+    border-style: none;
+    margin-top: 10px;
+    width: 90%;
+    min-width: 400px;
+}
+
+.listedVolunteerInactive{
+    background-color: var(--Secondary-Grey-Tint);
+}
+
+.badgeStyling{
+    display: flex;
+    align-items: end;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.badgeExpected{
+    background-color: var(--Primary-Blue);
+}
+
+.badgeArrived{
+    background-color: var(--Secondary-Yellow-Shade);
+    width: 100px;
+    padding-left: 20px;
+}
+
+.badgeLate{
+    background-color: var(--Primary-Orange);
+    width: 100px;
+    padding-left: 30px;
+}
+
+.volunteerDetails{
+    background-image: url("Assets/Visitor\ Details.png");
+}
+
+.sendButton{
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    height: 50px;
+    padding-left: 15px;
+}
+
+textarea{
+    border-top-left-radius: 24px;
+    border-bottom-left-radius: 24px;
 }

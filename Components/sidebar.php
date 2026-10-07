@@ -27,7 +27,7 @@
 
 <!-- Side navigation -->
 <div class="sidenav">
-<a href="#">
+<a href="home.php">
     <picture>
         <source srcset="../Assets/logo.png" media="(max-width: 600px)">
         <source srcset="../Assets/logo.png" media="(max-width: 1500px)">
@@ -38,14 +38,14 @@
 
 <!-- home nav link -->
   <div style="display: flex">
-    <div><a href="#" style="padding:0"><img src="../Assets/icons/home.png" alt="home" class="icon"></a></div>
-    <div> <a href="#"><h5 id="hide">Home</h5></a></div>
+    <div><a href="home.php" style="padding:0"><img src="../Assets/icons/home.png" alt="home" class="icon"></a></div>
+    <div> <a href="home.php"><h5 id="hide">Home</h5></a></div>
 </div>
 
 <!-- volunteer nav link -->
   <div style="display: flex">
-    <div><a href="#" style="padding:0"><img src="../Assets/icons/volunteers.png" alt="home" class="icon"></a></div>
-    <div> <a href="#"><h5 id="hide">Volunteers</h5></a></div>
+    <div><a href="volunteers.php" style="padding:0"><img src="../Assets/icons/volunteers.png" alt="home" class="icon"></a></div>
+    <div> <a href="volunteers.php"><h5 id="hide">Volunteers</h5></a></div>
 </div>
 
 <!-- bookings nav link -->
