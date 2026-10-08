@@ -137,6 +137,12 @@ p{
    color: var(--Secondary-Orange-Shade);
 }
 
+.primaryGhost{
+    border: 3px solid var(--Primary-Orange);
+    background-color: white;
+    color: var(--Secondary-Orange-Shade);
+}
+
 .whiteButton{
     background-color: white;
     color: black;
@@ -447,7 +453,7 @@ Retrieved 2026-09-30, License - CC BY-SA 4.0
     margin-top: 5%;
     margin-right: 3%;
     height: fit-content;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
     box-shadow: 0 4px 7px -4px rgba(0, 0, 0, 0.25);
 }
 
@@ -651,7 +657,9 @@ textarea{
 
 /* date picker */
 .calendar-container {
-    background: var(--Secondary-Yellow-Tint);
+    background-image: url("Assets/Visitor\ Details.png");
+    background-position: right;
+    background-size: cover;
     padding: 24px;
     border-radius: 24px;
     margin-top: 5%;
@@ -748,35 +756,115 @@ input[type="date"]:focus {
 }
 
 /* table with time slots */
+.bookingsTable{
+    max-width: 600px;
+}
+
 table {
     width: 100%;
-    max-width: 600px;
     border-collapse: collapse;
     background: white;
     overflow: hidden;
     margin-top: 20px;
     font-family: "Manrope", sans-serif;
 }
-        th, td {
-            padding: 12px 8px;
-            text-align: left;
-            font-size: 0.9rem;
-            color: #334155;
-        }
-        /* Table Header Style */
-        th {
-            background-color: var(--Secondary-Blue-Shade);
-            color: white;
-            font-weight: 600;
-        }
-        /* Alternating row colors using CSS pseudo-class */
-        tbody tr:nth-child(even) {
-            background-color: #f1f5f9; /* Light grey */
-        }
-        tbody tr:nth-child(odd) {
-            background-color: #ffffff; /* White */
-        }
-        /* Optional hover effect */
-        tbody tr:hover {
-            background-color: #e2e8f0;
-        }
+th, td {
+    padding: 12px 8px;
+    text-align: left;
+    font-size: 0.9rem;
+    color: #334155;
+}
+/* Table Header Style */
+th {
+    background-color: var(--Secondary-Blue-Shade);
+    color: white;
+    font-weight: 600;
+}
+/* Alternating row colors using CSS pseudo-class */
+tbody tr:nth-child(even) {
+    background-color: #f1f5f9;
+}
+tbody tr:nth-child(odd) {
+    background-color: white;
+}
+
+tbody tr:hover {
+    background-color: #e2e8f0;
+}
+
+/* Reports page */
+.tablePadding th, td{
+    padding: 12px 12px;
+}
+
+.recentActivityContainer{
+    background-color: white;
+    border-radius: 24px;
+    padding-left: 3%;
+    padding-top: 15px;
+    width: 90%;
+    padding-right: 3%;
+    padding-bottom: 15px;
+    margin-top: 20px;
+    box-shadow: 0 4px 7px -4px rgba(0, 0, 0, 0.25);
+}
+
+.hoursCounter{
+    display: flex;
+    color: var(--Secondary-Blue-Shade);
+    border: solid var(--Secondary-Blue);
+    border-width: 3px;
+    border-radius: 24px;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    margin-bottom: 15px;
+}
+
+.hoursGraphContainer{
+    background-color: white;
+    box-shadow: 0 4px 7px -4px rgba(0, 0, 0, 0.25);
+    margin-top: 20px;
+    padding: 25px;
+    border-radius: 24px;
+    margin-bottom: 30px;
+}
+
+.chart-card{
+    justify-content: center;
+    align-items: center;
+    max-width: 40vh;
+}
+
+/* supplies table */
+.custom-grid-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.custom-grid-table td {
+    padding: 12px 20px;
+    vertical-align: middle;
+}
+
+/* Horisontal line at the bottom of every row */
+.custom-grid-table tr {
+    border-bottom: 1px solid var(--Primary-Grey);
+}
+
+/* Vertical line between the columns */
+.custom-grid-table td:first-child {
+    border-right: 1px solid var(--Primary-Grey);
+}
+
+.materialsSourced{
+    background-image: url("Assets/Visitor\ Details.png");
+    background-position: right;
+    background-size: cover;
+    height: fit-content;
+    margin-top: 20px;
+    margin-bottom: 30px;
+    border-radius: 24px;
+    padding: 30px;
+    box-shadow: 0 4px 7px -4px rgba(0, 0, 0, 0.25);
+}

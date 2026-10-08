@@ -90,7 +90,7 @@
 
     <!-- table start -->
     <div>
-        <table>
+        <table class="bookingsTable">
     <thead>
         <tr>
             <th>Time</th>
@@ -122,7 +122,7 @@
             <td>12:00pm-1:00pm</td>
             <td>Lockout</td>
             <td>Nap time</td>
-            <td><button class="tertiaryButton tertiaryGhostDisabled buttonText">Locked</button></td>
+            <td><button class="tertiaryButton tertiaryGhostDisabled buttonText">Unlock</button></td>
         </tr>
         <tr>
             <td>1:00pm-2:00pm</td>

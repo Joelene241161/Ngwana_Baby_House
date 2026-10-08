@@ -56,8 +56,8 @@
 
 <!-- reports nav link -->
   <div style="display: flex">
-    <div><a href="#" style="padding:0"><img src="../Assets/icons/report.png" alt="home" class="icon"></a></div>
-    <div> <a href="#"><h5 id="hide">Reports</h5></a></div>
+    <div><a href="reports.php" style="padding:0"><img src="../Assets/icons/report.png" alt="home" class="icon"></a></div>
+    <div> <a href="reports.php"><h5 id="hide">Reports</h5></a></div>
 </div>
 
 <!-- staff nav link -->
