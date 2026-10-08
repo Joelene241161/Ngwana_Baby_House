@@ -50,8 +50,8 @@
 
 <!-- bookings nav link -->
   <div style="display: flex">
-    <div><a href="#" style="padding:0"><img src="../Assets/icons/booking.png" alt="home" class="icon"></a></div>
-    <div> <a href="#"><h5 id="hide">Bookings</h5></a></div>
+    <div><a href="bookings.php" style="padding:0"><img src="../Assets/icons/booking.png" alt="home" class="icon"></a></div>
+    <div> <a href="bookings.php"><h5 id="hide">Bookings</h5></a></div>
 </div>
 
 <!-- reports nav link -->

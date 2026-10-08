@@ -124,10 +124,10 @@
 
             <div style="display: flex" class="marginTopMedium">
                 <div>
-                    <button class="secondaryButton buttonText marginRightTiny">Check in</button>
+                    <button class="secondaryButton buttonText marginRightTiny secondaryButtonWidth">Check in</button>
                 </div>
                 <div>
-                    <button class="secondaryButton secondaryGhost buttonText">Check out</button>
+                    <button class="secondaryButton secondaryGhost buttonText secondaryButtonWidth">Check out</button>
                 </div>
              </div><!--end of button group -->
 

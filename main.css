@@ -104,7 +104,6 @@ p{
     padding-bottom: 8px;
     border-radius: 100px;
     border: none;
-    width: 145px;
 }
 
 .secondaryButton:hover{
@@ -116,6 +115,10 @@ p{
     border: 3px solid var(--Secondary-Yellow-Shade);
     background-color: white;
     color: var(--Secondary-Yellow-Shade);
+}
+
+.secondaryButtonWidth{
+    width: 145px;
 }
 
 .primaryButton{
@@ -164,6 +167,18 @@ p{
 .tertiaryButton:hover{
     background-color: var(--Secondary-Blue-Tint);
     color: var(--Secondary-Blue-Shade);
+}
+
+.tertiaryGhost{
+    border: 3px solid var(--Primary-Blue);
+    background-color: white;
+    color: var(--Secondary-Blue-Shade);
+}
+
+.tertiaryGhostDisabled{
+    border: 3px solid var(--Primary-Grey);
+    background-color: white;
+    color: grey;
 }
 
 .goodSemanticButton{
@@ -509,7 +524,7 @@ Retrieved 2026-09-30, License - CC BY-SA 4.0
 .smallInput{
     border-radius: 12px;
     border-color: var(--Primary-Grey);
-    width: 12%;
+    width: 60px;
     height: 30px;
 }
 
@@ -535,7 +550,7 @@ Retrieved 2026-09-30, License - CC BY-SA 4.0
 }
 
 .listedVolunteerInactive{
-    background-color: var(--Secondary-Grey-Tint);
+    background-color: white;
 }
 
 .badgeStyling{
@@ -633,3 +648,135 @@ textarea{
     padding-top: 10px;
     padding-bottom: 3px;
 }
+
+/* date picker */
+.calendar-container {
+    background: var(--Secondary-Yellow-Tint);
+    padding: 24px;
+    border-radius: 24px;
+    margin-top: 5%;
+}
+
+input[type="date"] {
+    padding: 10px 14px;
+    font-size: 1rem;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    outline: none;
+    cursor: pointer;
+    color: #334155;
+}
+input[type="date"]:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+}
+
+/* bookings page admin */
+.scheduleControls{
+    background-color: white;
+    border-radius: 24px;
+    padding-left: 8%;
+    padding-right: 8%;
+    padding-top: 5%;
+    padding-bottom: 2%;
+    margin-top: 4%;
+    margin-bottom: 3%;
+    box-shadow: 0 4px 7px -4px rgba(0, 0, 0, 0.25);
+}
+
+.selectedTime{
+    background-color: var(--Secondary-Orange-Tint);
+    text-align: center;
+    border-radius: 24px;
+    margin-top: 15px;
+    padding-top: 10px;
+    padding-bottom: 3px;
+}
+
+.paddingBottomTiny{
+    padding-bottom: 8px;
+}
+
+.capacity-btn { 
+    cursor: pointer; 
+    background-color: white;
+    border: none;
+    padding-top: 0;
+}
+
+.blockSlotButton{
+    background-color: var(--Secondary-Blue-Tint);
+    text-align: left;
+    border-radius: 24px;
+    border: none;
+    padding-top: 20px;
+    margin-top: 20px;
+    padding-bottom: 20px;
+    height: fit-content;
+    padding-right: 20px;
+}
+
+.marginBottom0{
+    margin-bottom: 0;
+}
+
+/* progress bar */
+.progressBar{
+    flex-grow: 1; 
+    height: 6px; 
+    background: #e2e8f0; 
+    border-radius: 9999px; 
+    overflow: hidden; 
+    width: 120px;
+}
+
+.progressFill{
+    width: 65%; 
+    height: 100%; 
+    background: var(--Primary-Orange); 
+    border-radius: 9999px;
+}
+
+.timeSlotsContainer{
+    background-color: white;
+    border-radius: 24px;
+    margin-top: 20px;
+    padding-top: 20px;
+    padding-left: 30px;
+    padding-right: 30px;
+    height: fit-content;
+}
+
+/* table with time slots */
+table {
+    width: 100%;
+    max-width: 600px;
+    border-collapse: collapse;
+    background: white;
+    overflow: hidden;
+    margin-top: 20px;
+    font-family: "Manrope", sans-serif;
+}
+        th, td {
+            padding: 12px 8px;
+            text-align: left;
+            font-size: 0.9rem;
+            color: #334155;
+        }
+        /* Table Header Style */
+        th {
+            background-color: var(--Secondary-Blue-Shade);
+            color: white;
+            font-weight: 600;
+        }
+        /* Alternating row colors using CSS pseudo-class */
+        tbody tr:nth-child(even) {
+            background-color: #f1f5f9; /* Light grey */
+        }
+        tbody tr:nth-child(odd) {
+            background-color: #ffffff; /* White */
+        }
+        /* Optional hover effect */
+        tbody tr:hover {
+            background-color: #e2e8f0;
+        }
