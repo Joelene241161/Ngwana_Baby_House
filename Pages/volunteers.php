@@ -84,16 +84,27 @@
  </div> <!-- end volunteers list -->
 
  <!-- selected volunteers details -->
-    <div class="volunteerDetails col-6">
+    <div class="volunteerDetails col-5">
         <h4>Volunteer name</h4>
         <p>10 April, 10:00am-11:00am</p>
-        <h5>Donations: <p>Nappies size 2</p><h5>
-        <h5>Selected Cares:</h5>
-        <h5>Contact: <p>000 000 0000</p><h5>
+        <h5>Donations: <p class="marginTopTiny">Nappies size 2</p><h5>
+
+        <h5 class="marginTopMedium">Selected Cares:</h5>
+
+        <div style="display: flex">
+            <div class="SelectedCares">
+                <h6>Feeding</h6>
+            </div>
+            <div class="SelectedCares">
+                <h6>Cuddle therapy</h6>
+            </div>
+        </div>
+
+        <h5 class="marginTopMedium">Contact: <p class="marginTopTiny">000 000 0000</p><h5>
         
     <div style="display: flex">
         <div>
-        <textarea></textarea>
+        <textarea placeholder="Write a message to volunteer..."></textarea>
         </div>
         <div>
         <button class="primaryButton buttonText sendButton">send</button>
@@ -103,6 +114,51 @@
     </div>
 
 </div> <!-- flex container end -->
+
+<div style="display: flex">
+    
+    <div class="col-4 volunteerStatus">
+        <h4 class="minionProMedium"> Volunteer Status </h4>
+        <p class="pLight">Update status of volunteer</p>
+        <h5>Volunteer name</h5>
+
+            <div style="display: flex" class="marginTopMedium">
+                <div>
+                    <button class="secondaryButton buttonText marginRightTiny">Check in</button>
+                </div>
+                <div>
+                    <button class="secondaryButton secondaryGhost buttonText">Check out</button>
+                </div>
+             </div><!--end of button group -->
+
+        <div class="timeStamp">
+            <h6>Time-stamped visit log</h6>
+            <p class="pLight">12:05 - checked in </p>
+        </div>
+     </div> <!-- End of one volunteer -->
+
+     <!-- Start of new volunteer -->
+      <div class="col-4 volunteerStatus">
+        <h4 class="minionProMedium"> Volunteer Status </h4>
+        <p class="pLight">Update status of volunteer</p>
+        <h5>Volunteer name</h5>
+
+            <div style="display: flex" class="marginTopMedium">
+                <div>
+                    <button class="secondaryButton buttonText marginRightTiny">Check in</button>
+                </div>
+                <div>
+                    <button class="secondaryButton secondaryGhost buttonText">Check out</button>
+                </div>
+             </div><!--end of button group -->
+
+        <div class="timeStamp">
+            <h6>Time-stamped visit log</h6>
+            <p class="pLight">12:05 - checked in </p>
+        </div>
+     </div> <!-- End of one volunteer -->
+
+</div>
 
 
     </div> <!-- main -->
