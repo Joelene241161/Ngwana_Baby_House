@@ -62,8 +62,8 @@
 
 <!-- staff nav link -->
   <div style="display: flex">
-    <div><a href="#" style="padding:0"><img src="../Assets/icons/staffEdit.png" alt="home" class="icon"></a></div>
-    <div> <a href="#"><h5 id="hide">Staff</h5></a></div>
+    <div><a href="staff.php" style="padding:0"><img src="../Assets/icons/staffEdit.png" alt="home" class="icon"></a></div>
+    <div> <a href="staff.php"><h5 id="hide">Staff</h5></a></div>
 </div>
 
     <hr style="height:2px;border-width:0;color:black;background-color:black">
