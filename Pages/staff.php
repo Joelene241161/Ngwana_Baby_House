@@ -129,7 +129,7 @@
  </div> <!-- end of flex container -->
 
     <!-- table start -->
-    <div class="recentActivityContainer staffTable">
+    <div class="recentActivityContainer staffTable paddingBottomSmall">
         <h4>Your staff</h4>
         <table class="tablePadding">
     <thead>

@@ -27,7 +27,7 @@
 
 <!-- Side navigation -->
 <div class="sidenav">
-<a href="home.php">
+<a href="homeVolunteer.php">
     <picture>
         <source srcset="../Assets/logo.png" media="(max-width: 600px)">
         <source srcset="../Assets/logo.png" media="(max-width: 1500px)">
@@ -38,28 +38,28 @@
 
 <!-- home nav link -->
   <div style="display: flex">
-    <div><a href="home.php" style="padding:0"><img src="../Assets/icons/home.png" alt="home" class="icon"></a></div>
-    <div> <a href="home.php"><h5 id="hide">Home</h5></a></div>
+    <div><a href="homeVolunteer.php" style="padding:0"><img src="../Assets/icons/home.png" alt="home" class="icon"></a></div>
+    <div> <a href="homeVolunteer.php"><h5 id="hide">Home</h5></a></div>
 </div>
 
 <!-- My visits nav link -->
   <div style="display: flex">
-    <div><a href="volunteers.php" style="padding:0"><img src="../Assets/icons/report.png" alt="home" class="icon"></a></div>
-    <div> <a href="volunteers.php"><h5 id="hide">My visits</h5></a></div>
+    <div><a href="visits.php" style="padding:0"><img src="../Assets/icons/report.png" alt="home" class="icon"></a></div>
+    <div> <a href="visits.php"><h5 id="hide">My visits</h5></a></div>
 </div>
 
 <!-- bookings nav link -->
   <div style="display: flex">
-    <div><a href="#" style="padding:0"><img src="../Assets/icons/booking.png" alt="home" class="icon"></a></div>
-    <div> <a href="#"><h5 id="hide">Bookings</h5></a></div>
+    <div><a href="bookingsVolunteer.php" style="padding:0"><img src="../Assets/icons/booking.png" alt="home" class="icon"></a></div>
+    <div> <a href="bookingsVolunteer.php"><h5 id="hide">Bookings</h5></a></div>
 </div>
 
     <hr style="height:2px;border-width:0;color:black;background-color:black">
 
 <!-- account  nav link -->
   <div style="display: flex">
-    <div><a href="#" style="padding:0"><img src="../Assets/icons/account.png" alt="home" class="icon"></a></div>
-    <div> <a href="#"><h5 id="hide">Account</h5></a></div>
+    <div><a href="account.php" style="padding:0"><img src="../Assets/icons/account.png" alt="home" class="icon"></a></div>
+    <div> <a href="account.php"><h5 id="hide">Account</h5></a></div>
 </div>
 </div>
 

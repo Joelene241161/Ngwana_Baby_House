@@ -392,6 +392,21 @@ Retrieved 2026-09-30, License - CC BY-SA 4.0
     text-decoration: none;
 }
 
+.linkTextYellow{
+    text-decoration: none;
+    color: var(--Secondary-Yellow-Shade);
+}
+
+.linkTextBlue{
+    text-decoration: none;
+    color: var(--Secondary-Blue-Shade);
+}
+
+.linkTextRed{
+    text-decoration: none;
+    color: var(--Secondary-Orange-Shade);
+}
+
 .navLinks{
     color: black;
     padding-right: 20px;
@@ -972,4 +987,65 @@ tbody tr:hover {
 .radio-button:has(input[type="radio"]:checked) {
   border-color: var(--Secondary-Yellow-Shade);
   background-color: var(--Secondary-Yellow-Lightest_Tint);
+}
+
+/* Volunteer homepage */
+.welcomeBanner{
+    background-image: url("Assets/volunteerHome.png");
+    background-position: right;
+    background-size: cover;
+    border-radius: 24px;
+    background-position: right;
+    padding: 45px 32px 32px 32px;
+    margin-top: 4%;
+}
+
+.textColour{
+    color: var(--Secondary-Orange-Shade);
+}
+
+.circle-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background-color: var(--Primary-Yellow);
+  color: white;
+  font-size: 30px;
+  font-weight: medium;
+  font-family: "Manrope", sans-serif;
+}
+
+.chooseDate{
+    border-radius: 24px;
+    background-image: url("Assets/Step1.png");
+    background-position: right;
+    background-size: cover;
+    padding: 18px;
+    padding-bottom: 45px;
+    margin-top: 2%;
+}
+
+.chooseDateBlue{
+    background-image: url("Assets/Step2.png");
+    background-position: top;
+}
+
+.circle-number-blue{
+    background-color: var(--Primary-Blue);
+}
+
+.chooseDateRed{
+    background-image: url("Assets/Step3.png");
+    background-position: top;
+}
+
+.circle-number-Red{
+    background-color: var(--Primary-Orange);
+}
+
+.marginTopLarge{
+    margin-top: 40px;
 }
