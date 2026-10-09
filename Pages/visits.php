@@ -31,34 +31,93 @@
 
     <div class="main">
 
-        <div class="welcomeBanner">
-            <h1 class="minionPro"> Welcome back to <span class="textColour">Ngwana Babyhouse</span> </h1>
-            <h5 class="marginTopMedium">Together we can change little lives.</h5>
+    <div class="scheduledVisits">
+        <h1 class="minionPro">Your scheduled visits</h1>
+            <div style="display: flex; gap: 20px; align-items: center;">
+                <div><img src="../Assets/icons/calendar.png" alt="formula" style="width: 70px" class="imagePaddingTop">
+            </div>
+            <div>
+                <h4 class="marginTopMedium">Tuesday, April 8</h4>
+                <p class="pLight marginBottom0">10:00am-11:00am </p>
+                <p class="linkTextBlue">Cuddle therapy </p>
+            </div>
+            <div style="display: flex; gap: 10px; margin-left: auto;" class="marginTopMedium">
+                <div> <button class="secondaryButton secondaryGhost buttonText secondaryButtonWidth">Cancel</button></div>
+                <div> <button class="secondaryButton buttonText secondaryButtonWidth">Check in</button></div>
         </div>
+                
+            </div>
+
+            <button class="primaryButton buttonText">Late</button>
+    </div>
 
 
 <div style="display: flex; gap: 20px">
-    <div class="col-4 chooseDate">
-        <div class="circle-number">1</div>
-        <h3 class="marginTopLarge"> Select a time </h3>
-        <p>Pick a volunteering date that works for you.</p>
-        <button class="secondaryButton secondaryGhost buttonText">View dates</button>
+    <div class="feedbackVolunteer col-7">
+        <h4 class="minionPro">Visit feedback</h4>
+        <h5 class="paddingBottomTiny">Feedback from your Ngwana family</h5>
+
+        <div class="feedbackContainer">
+            <h4 class="redText">Staff name</h4>
+            <p>12 August 2025, 11:00pm</p>
+            <p class="pLight">Thank you for the extra cuddle time this week, baby L slept so well after!</p>
+        </div>
+
+        <div class="feedbackContainer">
+            <h4 class="redText">Staff name</h4>
+            <p>12 August 2025, 11:00pm</p>
+            <p class="pLight">Thank you for the extra cuddle time this week, baby L slept so well after!</p>
+        </div>
+
     </div>
 
-    <div class="col-4 chooseDate chooseDateBlue">
-        <div class="circle-number circle-number-blue">2</div>
-        <h3 class="marginTopLarge"> Select a time </h3>
-        <p>Choose an available time slot.</p>
-        <button class="tertiaryButton tertiaryGhost buttonText">Review time slots</button>
-    </div>
+    <div class="careHistory col-4">
+        <h3>Your care history</h3>
 
-    <div class="col-4 chooseDate chooseDateRed">
-        <div class="circle-number circle-number-Red">3</div>
-        <h3 class="marginTopLarge"> Confirm your visit </h3>
-        <p>Contribute with your love and time.</p>
-        <button class="primaryButton primaryGhost buttonText">Make a change</button>
-    </div>
+        <div class="hoursContainer">
+            <h5> <span class="minionPro textBig">6.5</span> hrs total</h5>
+            <p>Thank you for your time and care!</p>
+        </div>
 
+        <div class="scroll-container">
+            <!-- Row 1 -->
+            <div class="row">
+                <div class="col"><img src="../Assets/feed.png" alt="formula" style="height: 50px"></div>
+                <div class="col">Feeding support</div>
+                <div class="col">3 hrs</div>
+            </div>
+            
+            <!-- Row 2 -->
+            <div class="row">
+                <div class="col"><img src="../Assets/care.png" alt="formula" style="height: 50px"></div>
+                <div class="col">Cuddle therapy</div>
+                <div class="col">3 hrs</div>
+            </div>
+
+            <!-- Row 3 -->
+            <div class="row">
+                <div class="col"><img src="../Assets/play.png" alt="formula" style="height: 50px"></div>
+                <div class="col">Play time</div>
+                <div class="col">3 hrs</div>
+            </div>
+
+             <!-- Row 4 -->
+            <div class="row">
+                <div class="col"><img src="../Assets/play.png" alt="formula" style="height: 50px"></div>
+                <div class="col">Play time</div>
+                <div class="col">3 hrs</div>
+            </div>
+
+             <!-- Row 5 -->
+            <div class="row">
+                <div class="col"><img src="../Assets/play.png" alt="formula" style="height: 50px"></div>
+                <div class="col">Play time</div>
+                <div class="col">3 hrs</div>
+            </div>
+            
+        </div>
+
+    </div>
 </div> <!-- flex container -->
 
 
