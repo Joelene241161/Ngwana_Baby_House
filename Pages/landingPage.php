@@ -36,7 +36,7 @@ Create an account to schedule a visit.<h4>
 </a>
 
 <a href="login.php" style="text-decoration: none;">
-<button class="primaryButton buttonText landingButton">I already have a account</button>
+<button class="primaryButton buttonText landingButton">I already have an account</button>
 </a>
 
 </section>

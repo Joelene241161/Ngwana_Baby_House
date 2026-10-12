@@ -26,6 +26,47 @@
 <body class="background">
 <section class="backgroundImageSignup">
 
+<?php
+require_once '../config.php';
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $username = trim($_POST['username']);
+    $email    = trim($_POST['email']);
+    $password = $_POST['password_hash'];
+
+    $errors = [];
+    if (empty($username)) $errors[] = "Your name is required";
+    if (empty($email)) $errors[] = "Email is required";
+    if (strlen($password) < 6) $errors[] = "Password must be at least 6 characters";
+
+    if (empty($errors)) {
+        $password_hash = password_hash($password, PASSWORD_DEFAULT);
+        $tokens = 0;
+
+        $stmt = $conn->prepare("INSERT INTO users (username, email, password_hash) VALUES (?, ?, ?)");
+        $stmt->bind_param("sss", $username, $email, $password_hash);
+
+        if ($stmt->execute()) {
+            $_SESSION['success'] = "Registration successful! Welcome aboard.";
+            header("Location: home.php");
+            exit();
+        }
+        } else {
+            if (strpos($stmt->error, 'Duplicate') !== false) {
+                $errors[] = "Username or email already exists";
+            } else {
+                $errors[] = "Registration failed: " . $stmt->error;
+            }
+        }
+    }
+?>
+
+    <?php if (!empty($errors)): ?>
+            <div class="error">
+                <?php foreach ($errors as $err) echo "• " . htmlspecialchars($err) . "<br>"; ?>
+            </div>
+        <?php endif; ?>
+
     <nav>
         <h2 style="opacity: 0;">space</h2>
     </nav>
@@ -39,12 +80,12 @@
         <label for="email">Email:</label><br>
         <input type="email" id="email" name="email" placeholder="Email address" required="" value=""><br>
 
-        <label for="passwordHash" class="spaceBetween">Password:</label><br>
-        <input type="password" id="passwordHash" name="passwordHash" required="">
+        <label for="password_hash" class="spaceBetween">Password:</label><br>
+        <input type="password" id="password_hash" name="password_hash" required="">
         <br>
 
-        <label for="userName" name="userName" class="spaceBetween">Your name:</label><br>
-        <input type="text" id="userName" name="userName" placeholder="First and last name" required="" value=""><br>
+        <label for="username" name="username" class="spaceBetween">Your name:</label><br>
+        <input type="text" id="username" name="username" placeholder="First and last name" required="" value=""><br>
 
         <input type="submit" class="primaryButton buttonText landingButton" value="Create Account" name="Submit">
         </form>
