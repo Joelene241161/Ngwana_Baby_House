@@ -1,3 +1,13 @@
+<?php
+require_once '../config.php';
+
+// Fetch active supply requests where received = 0
+$result = $conn->query("SELECT * FROM supplyrequest WHERE received = 0 ORDER BY created_at DESC");
+if (!$result) {
+    die("SQL Error: " . $conn->error);
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -62,11 +72,44 @@
         </div>
         <div>
            
-    <!-- one care requests -->
-    <div style="display: flex">
-        <div><img src="../Assets/formula.png" alt="formula" style="width: 44px" class="imagePaddingTop"></div>
-        <div> <p class="pLight careSuppliesText">Name of request</p> </div>
-    </div>
+    <?php if ($result && $result->num_rows > 0): ?>
+            <?php while ($row = $result->fetch_assoc()): ?>
+                
+                <?php
+                    // Map category to the correct image and name
+                    $category = strtolower($row['category']);
+                    $imgPath = '../Assets/wipes.png'; // default
+                    $displayName = ucfirst($category);
+                    
+                    if ($category === 'nappies') {
+                        $imgPath = '../Assets/diaper.png';
+                        $displayName = "Nappies (Size " . htmlspecialchars($row['size']) . ")";
+                    } elseif ($category === 'wipes') {
+                        $imgPath = '../Assets/wipes.png';
+                        $displayName = "Wipes (" . htmlspecialchars($row['wipe']) . ")";
+                    } elseif ($category === 'toys') {
+                        $imgPath = '../Assets/toys.png';
+                        $displayName = "Toys (" . htmlspecialchars($row['toy']) . ", Age " . htmlspecialchars($row['age']) . ")";
+                    } elseif ($category === 'formula') {
+                        $imgPath = '../Assets/formula.png';
+                        $displayName = "Formula (Stage " . htmlspecialchars($row['stage']) . ", " . htmlspecialchars($row['formula']) . ")";
+                    }
+                ?>
+
+                <!-- One care request -->
+                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px">
+                    <div>
+                        <img src="<?php echo $imgPath; ?>" alt="<?php echo $category; ?>" style="width: 44px" class="imagePaddingTop">
+                    </div>
+                    <div> 
+                        <p class="pLight careSuppliesText"><?php echo $displayName; ?></p>
+                    </div>
+                </div>
+
+            <?php endwhile; ?>
+        <?php else: ?>
+            <p class="pLight" style="color: #6b7280; margin-top: 10px;">No active care requests found.</p>
+        <?php endif; ?>
     
         </div>
     </div>
