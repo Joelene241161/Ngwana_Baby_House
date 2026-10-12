@@ -1109,7 +1109,7 @@ tbody tr:hover {
 
 .scroll-container {
   width: 100%;
-  max-height: 320px;
+  max-height: 230px;
   overflow-y: auto;
   overflow-x: hidden;
   border: 1px solid var(--Primary-Grey);
@@ -1127,4 +1127,72 @@ tbody tr:hover {
 
 .row:last-child {
   border-bottom: none;
+}
+
+.timeButton:has(input[type="radio"]:checked){
+    background-color: var(--Secondary-Blue-Tint);
+    border-color: var(--Primary-Blue);
+}
+
+.time-group {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  width: fit-content;
+  font-family: "Manrope",sans-serif;
+  flex-wrap: wrap;
+}
+
+.timeButton {
+  display: flex;
+  align-items: center;
+  padding: 10px 18px;
+  border: 2px solid var(--Primary-Grey);
+  border-radius: 24px;
+  background-color: #ffffff;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  width: 90px;
+}
+
+/* hide default browser radio input */
+.timeButton input[type="radio"] {
+  display: none;
+}
+
+.timeContainer{
+    background-color: white;
+    border-radius: 24px;
+    margin-top: 10%;
+    padding-top: 20px;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-bottom: 20px;
+    height: fit-content;
+}
+
+.volunteerSupplyNeeds{
+    background-image: url("Assets/Upcoming\ visits.png");
+    background-position: right;
+    background-size: cover;
+    border-radius: 24px;
+    padding: 30px;
+    margin-top: 15px;
+}
+
+.blueBgText{
+    background-color: var(--Secondary-Blue-Tint);
+    border-radius: 24px;
+    padding: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.confirmBooking{
+    background-color: white;
+    border-radius: 24px;
+    padding: 20px;
+    box-shadow: 0 4px 7px -4px rgba(0, 0, 0, 0.25);
+    margin-top: 20px;
+    margin-bottom: 20px;
 }

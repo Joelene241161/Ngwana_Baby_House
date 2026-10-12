@@ -38,7 +38,7 @@
     <div class="col-5">
     
     <div class="calendar-container">
-    <label for="event-date"><h4>Select Date</h4></label>
+    <label for="event-date"><h4>Select a date</h4></label>
     <input type="date" id="event-date" class="marginTopTiny">
     </div>
 
