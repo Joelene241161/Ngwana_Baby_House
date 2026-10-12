@@ -70,8 +70,8 @@
 
 <!-- account nav link -->
   <div style="display: flex">
-    <div><a href="#" style="padding:0"><img src="../Assets/icons/account.png" alt="home" class="icon"></a></div>
-    <div> <a href="#"><h5 id="hide">Account</h5></a></div>
+    <div><a href="account.php" style="padding:0"><img src="../Assets/icons/account.png" alt="home" class="icon"></a></div>
+    <div> <a href="account.php"><h5 id="hide">Account</h5></a></div>
 </div>
 </div>
 
