@@ -1,3 +1,34 @@
+<?php
+require_once '../config.php';
+
+// fetch total received items
+$totalResult = $conn->query("SELECT COUNT(*) AS total FROM supplyrequest WHERE received = 1");
+$totalRow = $totalResult->fetch_assoc();
+$totalItems = $totalRow['total'] ?? 0;
+
+// initialises category counts, default zero
+$counts = [
+    'nappies' => 0,
+    'wipes' => 0,
+    'formula' => 0,
+    'toys' => 0
+];
+
+// fetch counts, grouped by category, where received = 1
+$sql = "SELECT category, COUNT(*) as count FROM supplyrequest WHERE received = 1 GROUP BY category";
+$result = $conn->query($sql);
+
+if ($result && $result->num_rows > 0) {
+    while($row = $result->fetch_assoc()) {
+        $cat = $row['category'];
+        if (array_key_exists($cat, $counts)) {
+            $counts[$cat] = $row['count'];
+        }
+    }
+}
+$conn->close();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -92,47 +123,47 @@
         <?php include "../Components/graph.php";?>
     </div>
 
-    <div class="col-6 materialsSourced">
-        <h4>Donated items</h4>
-        <p class="pLight marginBottom0">Recorded daily </p>
+<div class="col-6 materialsSourced">
+    <h4>Donated items</h4>
+    <p class="pLight marginBottom0">Automatically updated </p>
 
-<div style="display: flex; gap: 10%; align-items: center">
-
-    <div>
-        <img src="../Assets/basket.png" alt="wet wipes" style="width: 90px">
-    </div>
-    <div><h3 class="pLight"><strong>36</strong> items</h3></div>
-
-    <div>
-        <table class="custom-grid-table">
-    <tr>
-        <td>Nappies</td>
-        <td>16</td>
-    </tr>
-    <tr>
-        <td>Wipes</td>
-        <td>12</td>
-    </tr>
-    <tr>
-        <td>Formula</td>
-        <td>10</td>
-    </tr>
-    <tr>
-        <td>Toys</td>
-        <td>0</td>
-    </tr>
-</table>
+    <div style="display: flex; gap: 10%; align-items: center">
+        <div>
+            <img src="../Assets/basket.png" alt="basket of donated items" style="width: 90px">
+        </div>
+        <div>
+            <h3 class="pLight"><strong><?php echo $totalItems; ?></strong> items</h3>
+        </div>
+        <div>
+            <table class="custom-grid-table">
+                <tr>
+                    <td>Nappies</td>
+                    <td><?php echo $counts['nappies']; ?></td>
+                </tr>
+                <tr>
+                    <td>Wipes</td>
+                    <td><?php echo $counts['wipes']; ?></td>
+                </tr>
+                <tr>
+                    <td>Formula</td>
+                    <td><?php echo $counts['formula']; ?></td>
+                </tr>
+                <tr>
+                    <td>Toys</td>
+                    <td><?php echo $counts['toys']; ?></td>
+                </tr>
+            </table>
     </div>
 
 </div> <!-- end of flex container -->
 
-<div class="col">
+<div class="row">
     <div class="row marginTopMedium">
-<button class="primaryButton buttonText"><a href="homeSupplies.php" class="invisibleLink">Request more items &#10140;</a></button>
+<button class="primaryButton buttonText" style="width: 200px"><a href="homeSupplies.php" class="invisibleLink">Request items &#10140;</a></button>
     </div>
 
-    <div class="row marginTopTiny">
-<button class="secondaryButton buttonText">Download this month's report &#10515;</button>
+    <div class="row marginTopMedium">
+<button class="secondaryButton buttonText" style="width: 200px">Download a report</button>
 </div>
 
 </div>

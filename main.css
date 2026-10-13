@@ -1278,6 +1278,7 @@ tbody tr:hover {
     padding: 20px;
     margin-top: 20px;
     box-shadow: 0 4px 7px -4px rgba(0, 0, 0, 0.25);
+    margin-bottom: 20px;
 }
 
 .form-container {
