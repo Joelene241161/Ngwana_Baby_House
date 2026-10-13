@@ -1,3 +1,8 @@
+<?php
+// logic file
+include "../Components/manageSchedule.php";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,129 +35,114 @@
     <!-- <?php include "../Components/sidebar.php";?> -->
 
     <div class="main">
+        <h3 class="minionPro paddingTopMedium">Manage volunteer bookings</h3>
 
-     <h3 class="minionPro paddingTopMedium"> Manage volunteer bookings </h3>
+        <div style="display: flex; gap: 40px">
+            <!-- Left: Schedule controls panel -->
+            <div class="col-5">
+                <div class="calendar-container">
+                    <label for="event-date"><h4>Select a date</h4></label>
+                    <input type="date" id="event-date" class="marginTopTiny" value="<?php echo $selectedDate; ?>" onchange="location.href='?date='+this.value+'&slot=<?php echo $activeSlotTable; ?>'">
+                </div>
 
+                <div class="scheduleControls">
+                    <h4 class="paddingBottomTiny">Schedule Controls</h4>
+                    <h6 class="pLight">Manage bookings for the selected time block</h6>
 
-<div style="display: flex; gap: 40px">
-    <div class="col-5">
-    
-    <div class="calendar-container">
-    <label for="event-date"><h4>Select a date</h4></label>
-    <input type="date" id="event-date" class="marginTopTiny">
-    </div>
+                    <div class="selectedTime">
+                        <h6><?php echo $slotTables[$activeSlotTable]; ?> - <?php echo $allSlotsData[$activeSlotTable]['status']; ?></h6>
+                    </div>
 
-    <div class="scheduleControls">
-        <h4 class="paddingBottomTiny">Schedule Controls</h4>
-        <h6 class="pLight">Manage bookings for the selected time block</h6>
+                    <form method="POST" action="bookings.php?date=<?php echo $selectedDate; ?>&slot=<?php echo $activeSlotTable; ?>">
+                        <input type="hidden" name="action_slot" value="<?php echo $activeSlotTable; ?>">
+                        
+                        <div style="display: flex">
+                            <div class="marginRightTiny">
+                                <h6 class="marginTopMedium">Capacity limit</h6>
+                                <button type="button" class="capacity-btn" onclick="changeQty(-1)"><h3>&minus;</h3></button>
+                                <input type="number" id="qty" name="new_capacity_limit" value="<?php echo $activeData['capacityLimit']; ?>" min="1" max="20" class="smallInput">
+                                <button type="button" class="capacity-btn" onclick="changeQty(1)"><h3>&plus;</h3></button>
+                                <p class="pLight marginRightTiny">Maximum visitors</p>
+                            </div>
 
-        <div class="selectedTime">
-            <h6>10:00am-11:00am - Fully Booked</h6>
+                            <button type="submit" name="toggle_lock" value="1" style="display: flex" class="blockSlotButton marginLeftSmall">
+                                <div class="marginRightTiny"><span style='font-size:33px;'>&#10754;</span></div>
+                                <div>
+                                    <h6 class="marginBottom0"><?php echo $activeData['locked'] ? 'Unlock Slot' : 'Block Slot'; ?></h6>
+                                    <p class="pLight marginBottom0"><?php echo $activeData['locked'] ? 'Allow bookings again' : 'Prevent further bookings'; ?></p>
+                                </div>
+                            </button>
+                        </div>
+                        
+                        <button type="submit" class="primaryButton buttonText col-12 mt-2">Save changes</button>
+                    </form>
+
+                    <button class="tertiaryButton buttonText col-12 mt-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                        View who is booked
+                    </button>
+                </div>
+            </div>
+
+            <!-- Right: Time slots table -->
+            <div class="timeSlotsContainer col-6" style="margin-bottom: 40px">
+                <div style="display: flex; gap: 20%;">
+                    <div><h4><?php echo date('l, F j', strtotime($selectedDate)); ?></h4></div>
+                    <div>
+                        <p class="pLight">Daily capacity: <?php echo "$totalDailyCurrent / $totalDailyCapacity"; ?></p>
+                    </div>
+                </div>
+
+                <div>
+                    <table class="bookingsTable">
+                        <thead>
+                            <tr>
+                                <th>Time</th>
+                                <th>Status</th>
+                                <th>Capacity</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($slotTables as $table => $label): 
+                                $slot = $allSlotsData[$table];
+                                $isLocked = $slot['locked'] == 1;
+                                $capacityText = $isLocked ? 'Nap time / Locked' : "{$slot['capacity']} / {$slot['capacityLimit']}";
+                                $actionText = ($table === $activeSlotTable) ? 'Selected' : 'View';
+                                $btnClass = ($isLocked) ? 'tertiaryButton tertiaryGhostDisabled buttonText' : 'tertiaryButton tertiaryGhost buttonText';
+                            ?>
+                                <tr>
+                                    <td><?php echo $label; ?></td>
+                                    <td><?php echo $slot['status']; ?></td>
+                                    <td><?php echo $capacityText; ?></td>
+                                    <td>
+                                        <a href="?date=<?php echo $selectedDate; ?>&slot=<?php echo $table; ?>">
+                                            <button type="button" class="<?php echo $btnClass; ?>"><?php echo $actionText; ?></button>
+                                        </a>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
-
-<div style="display: flex">
-    <div class="marginRightTiny">
-    <h6 class="marginTopMedium">Capacity limit</h6>
-        <button type="button" class="capacity-btn" onclick="changeQty(-1)"> <h3>&minus;</h3> </button>
-          <input type="number" id="qty" name="quantity" value="1" min="1" max="8" class="smallInput">
-          <button type="button" class="capacity-btn" onclick="changeQty(1)"> <h3>&plus;</h3></button>
-    <p class="pLight marginRightTiny">Maximum visitors</p>
     </div>
 
-    <button style="display: flex" class="blockSlotButton marginLeftSmall">
-        <div class="marginRightTiny"><span style='font-size:33px;'>&#10754;</span></div>
-        <div>
-            <h6 class="marginBottom0">Block Slot</h6>
-            <p class="pLight marginBottom0">Prevent further bookings</p>
-        </div>
-    </button>
-
-</div>
-
-<button class="tertiaryButton buttonText col-12">
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-  <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
-  <circle cx="12" cy="7" r="4"></circle>
-</svg>
- View who is booked</button>
-    </div>
-</div>
-
-<!-- day time slots -->
-<div class="timeSlotsContainer col-6">
-    <div  style="display: flex; gap: 20%">
-    <div><h4>Tuesday, April 8</h4></div>
-    <div>
-        <p class="pLight">Daily capacity: 32/52</p>
-        <?php include "../Components/progressBar.php";?>
-    </div>
-    </div> <!-- header end -->
-
-    <!-- table start -->
-    <div>
-        <table class="bookingsTable">
-    <thead>
-        <tr>
-            <th>Time</th>
-            <th>Status</th>
-            <th>Capacity</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>9:00am-10:00am</td>
-            <td>Open</td>
-            <td>2 / 8</td>
-            <td><button class="tertiaryButton tertiaryGhost buttonText">View</button></td>
-        </tr>
-        <tr>
-            <td>10:00am-11:00am</td>
-            <td>Full</td>
-            <td>8 / 8</td>
-            <td><button class="tertiaryButton tertiaryGhost buttonText">View</button></td>
-        </tr>
-        <tr>
-            <td>11:00am-12:00pm</td>
-            <td>Limited</td>
-            <td>6 / 8</td>
-            <td><button class="tertiaryButton tertiaryGhost buttonText">View</button></td>
-        </tr>
-        <tr>
-            <td>12:00pm-1:00pm</td>
-            <td>Lockout</td>
-            <td>Nap time</td>
-            <td><button class="tertiaryButton tertiaryGhostDisabled buttonText">Unlock</button></td>
-        </tr>
-        <tr>
-            <td>1:00pm-2:00pm</td>
-            <td>Open</td>
-            <td>3 / 8</td>
-            <td><button class="tertiaryButton tertiaryGhost buttonText">View</button></td>
-        </tr>
-    </tbody>
-</table>
-    </div> <!-- table end -->
-
-</div> <!-- day time slots end-->
-
-</div> <!-- flex container -->
-
-
-    </div> <!-- main -->
-
-    <!-- Quantity selector -->
- <script>
-function changeQty(delta) {
-    let qty = document.getElementById('qty');
-    let newVal = parseInt(qty.value) + delta;
-    if (newVal >= parseInt(qty.min) && newVal <= parseInt(qty.max)) {
-        qty.value = newVal;
+    <script>
+    function changeQty(delta) {
+        let qty = document.getElementById('qty');
+        let newVal = parseInt(qty.value) + delta;
+        if (newVal >= parseInt(qty.min) && newVal <= parseInt(qty.max)) {
+            qty.value = newVal;
+        }
     }
-}
-</script>
+    </script>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="script.js"></script>
 </body>
 </html>

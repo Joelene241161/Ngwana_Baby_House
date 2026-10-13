@@ -1,3 +1,8 @@
+<?php
+// logic file
+include "../Components/volunteerBookingLogic.php";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,145 +34,120 @@
 
     <?php include "../Components/sidebarVolunteer.php";?>
 
-    <div class="main">
+<div class="main">
+    <?php if (!empty($successMessage)): ?>
+        <div class="alert alert-success"><?php echo $successMessage; ?></div>
+    <?php endif; ?>
+    <?php if (!empty($errorMessage)): ?>
+        <div class="alert alert-danger"><?php echo $errorMessage; ?></div>
+    <?php endif; ?>
 
-<div style="display: flex; gap: 40px">
-    <div class="col-5">
+    <form method="POST" action="bookingsVolunteer.php?date=<?php echo $selectedDate; ?>">
+        <div style="display: flex; gap: 40px">
+            <div class="col-5">
+                <h3 class="minionPro marginTopLarge">Book a session</h3>
+                <h4>Select your visitation slot</h4>
 
-    <h3 class="minionPro marginTopLarge"> Book a session </h3>
-    <h4> Select your visitation slot </h4>
+                <div class="calendar-container">
+                    <label for="event-date"><h4>Select a date</h4></label>
+                    <input type="date" id="event-date" name="date" class="marginTopTiny" value="<?php echo $selectedDate; ?>" onchange="location.href='bookingsVolunteer.php?date='+this.value">
+                </div>
 
-    <div class="calendar-container">
-    <label for="event-date"><h4>Select a date</h4></label>
-    <input type="date" id="event-date" class="marginTopTiny">
-    </div>
+                <div class="scheduleControls">
+                    <h4>Care board</h4>
+                    <h5>I’d love to help with...</h5>
 
-    <div class="scheduleControls">
-        <h4>Care board</h4>
-        <h5>I’d love to help with...</h5>
+                    <div class="radio-group">
+                        <label class="radio-button">
+                            <input type="radio" name="task" value="cuddle" checked>
+                            <span class="radio-icon"></span>
+                            <img src="../Assets/care.png" alt="cuddle therapy" style="width: 40px" class="marginRightTiny">
+                            <span class="radio-label">Cuddles & Support</span>
+                        </label>
 
-        <!-- selected care task -->
-         <div class="radio-group">
-  <label class="radio-button">
-    <input type="radio" name="custom-radio" value="1" checked>
-    <span class="radio-icon"></span>
-    <img src="../Assets/care.png" alt="caregiver illustration" style="width: 40px" class="marginRightTiny">
-    <span class="radio-label">Cuddles & Support</span>
-  </label>
+                        <label class="radio-button">
+                            <input type="radio" name="task" value="tummy">
+                            <span class="radio-icon"></span>
+                            <img src="../Assets/tummy.png" alt="tummy time" style="height: 40px" class="marginRightTiny">
+                            <span class="radio-label">Tummy Time</span>
+                        </label>
 
-  <label class="radio-button">
-    <input type="radio" name="custom-radio" value="2">
-    <span class="radio-icon"></span>
-    <img src="../Assets/tummy.png" alt="caregiver illustration" style="height: 40px" class="marginRightTiny">
-    <span class="radio-label">Tummy Time</span>
-  </label>
+                        <label class="radio-button">
+                            <input type="radio" name="task" value="play">
+                            <span class="radio-icon"></span>
+                            <img src="../Assets/toys.png" alt="play and learn" style="width: 40px" class="marginRightTiny">
+                            <span class="radio-label">Play & Learn</span>
+                        </label>
 
-  <label class="radio-button">
-    <input type="radio" name="custom-radio" value="3">
-    <span class="radio-icon"></span>
-    <img src="../Assets/toys.png" alt="caregiver illustration" style="width: 40px" class="marginRightTiny">
-    <span class="radio-label">Play & Learn</span>
-  </label>
+                        <label class="radio-button">
+                            <input type="radio" name="task" value="reading">
+                            <span class="radio-icon"></span>
+                            <img src="../Assets/read.png" alt="reading and stories" style="height: 40px" class="marginRightTiny">
+                            <span class="radio-label">Reading & Stories</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
 
-  <label class="radio-button">
-    <input type="radio" name="custom-radio" value="3">
-    <span class="radio-icon"></span>
-    <img src="../Assets/read.png" alt="caregiver illustration" style="height: 40px" class="marginRightTiny">
-    <span class="radio-label">Reading & Stories</span>
-  </label>
-</div>
-    </div>
+            <!-- day time slots -->
+            <div class="col-6">
+                <div class="timeContainer">
+                    <h4>Select an available time</h4>
 
+                    <div class="time-group marginTop15">
+                        <?php 
+    $availableSlotsCount = 0;
+    if (!empty($slotTables)):
+        foreach ($slotTables as $key => $slot): 
+            // hide locked slots or slots at/over capacity limit
+            if ($slot['locked'] == 1 || $slot['capacity'] >= $slot['capacityLimit']) {
+                continue;
+            }
+            $availableSlotsCount++;
+    ?>
+            <label class="timeButton">
+                <input type="radio" name="slot_key" value="<?php echo $key; ?>" <?php echo ($availableSlotsCount === 1) ? 'checked' : ''; ?>>
+                <span class="radio-label"><?php echo $slot['label']; ?></span>
+            </label>
+    <?php 
+        endforeach; 
+    endif;
+    
+    if ($availableSlotsCount === 0):
+    ?>
+        <p class="text-danger mt-3">No available time slots for this date. Please select another day.</p>
+    <?php endif; ?>
+                    </div>
+                </div>
 
-</div>
+                <div class="volunteerSupplyNeeds">
+                    <h4>View supply needs</h4>
+                    <p class="pLight">If you want to go the extra mile; you can bring supplies with you on your next visit, but remember that your time and love is more than enough.</p>
+                    <div style="display: flex; gap: 20px">
+                        <div><img src="../Assets/diaper.png" alt="diapers" style="width: 60px"></div>
+                        <div><img src="../Assets/wipes.png" alt="wet wipes" style="height: 60px"></div>
+                        <div><img src="../Assets/toys.png" alt="toys" style="width: 60px"></div>
+                        <div><img src="../Assets/formula.png" alt="formula" style="width: 60px"></div>
+                        <button type="button" class="secondaryButton buttonText" style="height: fit-content">View supply list</button>
+                    </div>
+                </div>
 
-<!-- day time slots -->
-<div class="col-6">
-    <div class="timeContainer">
-    <h4>Select a time</h4>
+                <div class="confirmBooking">
+                    <h3 class="minionPro" style="font-size: 35px">Almost there!</h3>
+                    <span class="blueBgText">Check everything looks right before confirming your visit.</span>
+                    <h5 class="marginTopMedium">Personal details: <?php echo htmlspecialchars($userName); ?></h5>
+                    <h5>Date: <?php echo date('l, j F Y', strtotime($selectedDate)); ?></h5>
+                    <p>Please arrive 5–10 minutes early.</p>
 
-        <!-- selected time slot -->
-         <div class="time-group marginTop15">
-  <label class="timeButton">
-    <input type="radio" name="custom-radio" value="9" checked>
-    <span class="radio-label">09 AM</span>
-  </label>
-
-  <label class="timeButton">
-    <input type="radio" name="custom-radio" value="10">
-    <span class="radio-label">10 AM</span>
-  </label>
-
-  <label class="timeButton">
-    <input type="radio" name="custom-radio" value="11">
-    <span class="radio-label">11 AM</span>
-  </label>
-
-  <label class="timeButton">
-    <input type="radio" name="custom-radio" value="12">
-    <span class="radio-label">12 AM</span>
-  </label>
-
-  <label class="timeButton">
-    <input type="radio" name="custom-radio" value="1">
-    <span class="radio-label">1 PM</span>
-  </label>
-
-  <label class="timeButton">
-    <input type="radio" name="custom-radio" value="2">
-    <span class="radio-label">2 PM</span>
-  </label>
-
-  <label class="timeButton">
-    <input type="radio" name="custom-radio" value="3">
-    <span class="radio-label">3 PM</span>
-  </label>
-
-  <label class="timeButton">
-    <input type="radio" name="custom-radio" value="4">
-    <span class="radio-label">4 PM</span>
-  </label>
-
-  <label class="timeButton">
-    <input type="radio" name="custom-radio" value="5">
-    <span class="radio-label">5 PM</span>
-  </label>
-</div><!-- end of time slot radio group -->
-
-</div>
-
-<div class="volunteerSupplyNeeds">
-<h4>View supply needs</h4>
-<p class="pLight">If you want to go the extra mile; you can bring supplies with you on your next visit, but remember that your time and love is more than enough.</p>
-<div style="display: flex; gap: 20px">
-    <div><img src="../Assets/diaper.png" alt="diapers" style="width: 60px"></div>
-    <div><img src="../Assets/wipes.png" alt="wet wipes" style="height: 60px"></div>
-    <div><img src="../Assets/toys.png" alt="toys" style="width: 60px"></div>
-    <div><img src="../Assets/formula.png" alt="formula" style="width: 60px"></div>
-    <button class="secondaryButton buttonText" style="height: fit-content">View supply list</button>
-</div>
-</div>
-
-<div class="confirmBooking">
-    <h3 class="minionPro" style="font-size: 35px"> Almost there! </h3>
-    <span class="blueBgText">Check everything looks right before confirming your visit.</span>
-    <h5 class="marginTopMedium">Personal details: Mia T.</h5>
-    <h5>Activity added: Cuddle therapy</h5>
-    <h5>Date & time: Monday, 8 April, 10:00 AM</h5>
-    <p>Please arrive 5–10 minutes early.</p>
-
-    <div style="display: flex; gap: 10px; margin-left: auto;" class="marginTopMedium">
-        <div> <button class="primaryButton primaryGhost buttonText">Cancel</button></div>
-        <div> <button class="primaryButton buttonText">Schedule visit</button></div>
-        </div>
-</div>
-
-</div> <!-- right side end-->
-
-</div> <!-- flex container -->
-
-
-    </div> <!-- main -->
+                    <div style="display: flex; gap: 10px; margin-left: auto;" class="marginTopMedium">
+                        <div><button type="reset" class="primaryButton primaryGhost buttonText">Cancel</button></div>
+                        <div><button type="submit" name="book_visit" value="1" class="primaryButton buttonText" <?php echo ($availableSlotsCount === 0) ? 'disabled' : ''; ?>>Schedule visit</button></div>
+                    </div>
+                </div>
+            </div> <!-- right side end-->
+        </div> <!-- flex container -->
+    </form>
+</div> <!-- main -->
 
     <!-- Quantity selector -->
  <script>

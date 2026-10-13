@@ -62,13 +62,13 @@ if (!$result) {
     <div class="visitFeedback">
         <h3 class="minionPro"> Visit Feedback </h3>
         <p>Write feedback from the Ngwana family to a volunteer.</p>
-        <button class="whiteButton buttonText">Write feedback</button>
+        <a href="volunteers.php" class="invisibleLink" style="color: black"><button class="whiteButton buttonText">Write feedback</button></a>
     </div>
 
     <div class="careRequests">
         <div style="display: flex">
             <h4 class="h4Bold"> Active care requests </h4>
-            <button class="tertiaryButton buttonText marginLeftSmall"><a href="homeSupplies.php" class="invisibleLink">Create a request &#10140;</a></button>
+            <a href="homeSupplies.php" class="invisibleLink marginLeftSmall" style="width: 240px"><button class="tertiaryButton buttonText">Create a request &#10140;</button></a>
         </div>
         <div>
            
@@ -121,7 +121,7 @@ if (!$result) {
             <div class="upcomingVisits">
             <h3> Volunteer Name <span class="badge rounded-pill text-bg-light"><h6>Arrived</h6></span></h3>
             <p>10 April, 10:00am-11:00am</p>
-            <button class="secondaryButton buttonText marginTopSmall">View visit details</button>
+            <a href="volunteers.php" class="invisibleLink"><button class="secondaryButton buttonText marginTopSmall">View visit details</button></a>
             </div>
         
     </div>
