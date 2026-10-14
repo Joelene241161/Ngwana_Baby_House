@@ -28,6 +28,7 @@
 <body class="background">
 
     <!-- <?php include "../Components/sidebarVolunteer.php";?> -->
+     <?php include "../Components/disclaimerModal.php";?>
 
     <div class="main">
 

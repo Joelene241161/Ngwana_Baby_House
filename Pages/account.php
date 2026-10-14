@@ -134,6 +134,14 @@ $stmt->close();$conn->close();
       </form>
 
         </div> 
+
+        <div style="display: flex; gap: 10px; margin-bottom: 20px">
+            <div>
+            <button class="secondaryButton buttonText">Log out</button></div>
+            <div>
+            <button class="primaryButton buttonText">Delete account</button></div>
+        </div>
+
     </div> 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
