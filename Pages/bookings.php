@@ -32,7 +32,15 @@ include "../Components/manageSchedule.php";
 
 <body class="background">
 
-    <!-- <?php include "../Components/sidebar.php";?> -->
+    <!-- Desktop sidebar -->
+    <div class="d-none d-md-block">
+        <?php include "../Components/sidebar.php";?>
+    </div>
+
+    <!-- Mobile navbar -->
+    <div class="d-block d-md-none">
+        <?php include "../Components/mobileNav.php";?>
+    </div>
 
     <div class="main">
         <h3 class="minionPro paddingTopMedium">Manage volunteer bookings</h3>
@@ -131,6 +139,8 @@ include "../Components/manageSchedule.php";
             </div>
         </div>
     </div>
+
+    <div style="margin-bottom: 75px"></div>
 
     <script>
     function changeQty(delta) {

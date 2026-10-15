@@ -1,7 +1,7 @@
 <?php
 require_once '../config.php';
 
-$user_id =$_SESSION['user_id'] ?? 1; 
+$user_id =$_SESSION['user_id'] ?? 1;  
 
 // Fetch user data from database
 $stmt =$conn->prepare("SELECT username, email, role, telephoneNumber, profilePicture FROM users WHERE user_id = ?");
@@ -41,7 +41,33 @@ $stmt->close();$conn->close();
 
 <body class="background">
 
-    <!-- <?php include "../Components/sidebar.php";?> -->
+    <!-- Desktop sidebar -->
+    <div class="d-none d-md-block">
+        <?php 
+
+        $role = $user['role'] ?? $_SESSION['role'] ?? 'volunteer';
+
+        if ($role === 'staff') {
+            include "../Components/sidebar.php";
+        } else {
+            include "../Components/sidebarVolunteer.php";
+        }
+        ?>
+    </div>
+
+    <!-- Mobile navbar -->
+    <div class="d-block d-md-none">
+        <?php 
+
+        $role = $user['role'] ?? $_SESSION['role'] ?? 'volunteer';
+
+        if ($role === 'staff') {
+            include "../Components/mobileNav.php";
+        } else {
+            include "../Components/mobileNavVolunteer.php";
+        }
+        ?>
+    </div>
 
     <div class="main">
         <div class="accountContainer">
@@ -146,6 +172,8 @@ $stmt->close();$conn->close();
         </div>
 
     </div> 
+
+    <div style="margin-bottom: 75px"></div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script>

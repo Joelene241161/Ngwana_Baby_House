@@ -27,7 +27,15 @@
 
 <body class="background">
 
-    <!-- <?php include "../Components/sidebar.php";?> -->
+    <!-- Desktop sidebar -->
+    <div class="d-none d-md-block">
+        <?php include "../Components/sidebar.php";?>
+    </div>
+
+    <!-- Mobile navbar -->
+    <div class="d-block d-md-none">
+        <?php include "../Components/mobileNav.php";?>
+    </div>
 
     <div class="main">
     
@@ -162,6 +170,8 @@
 
 
     </div> <!-- main -->
+
+    <div style="margin-bottom: 75px"></div>
     
    <?php include "../Components/supplyModal.php";?>
 

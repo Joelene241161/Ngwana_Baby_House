@@ -32,7 +32,15 @@ include "../Components/volunteerBookingLogic.php";
 
 <body class="background">
 
-    <?php include "../Components/sidebarVolunteer.php";?>
+        <!-- Desktop sidebar -->
+    <div class="d-none d-md-block">
+        <?php include "../Components/sidebarVolunteer.php";?>
+    </div>
+
+    <!-- Mobile navbar -->
+    <div class="d-block d-md-none">
+        <?php include "../Components/mobileNavVolunteer.php";?>
+    </div>
 
 <div class="main">
     <?php if (!empty($successMessage)): ?>
@@ -148,6 +156,8 @@ include "../Components/volunteerBookingLogic.php";
         </div> <!-- flex container -->
     </form>
 </div> <!-- main -->
+
+<div style="margin-bottom: 75px"></div>
 
     <!-- Quantity selector -->
  <script>

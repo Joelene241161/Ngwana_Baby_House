@@ -58,7 +58,15 @@ $conn->close();
 
 <body class="background">
 
-    <!-- <?php include "../Components/sidebar.php";?> -->
+        <!-- Desktop sidebar -->
+    <div class="d-none d-md-block">
+        <?php include "../Components/sidebar.php";?>
+    </div>
+
+    <!-- Mobile navbar -->
+    <div class="d-block d-md-none">
+        <?php include "../Components/mobileNav.php";?>
+    </div>
 
     <div class="main">
 
@@ -173,6 +181,8 @@ $conn->close();
 
 
     </div> <!-- main -->
+
+    <div style="margin-bottom: 75px"></div>
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
