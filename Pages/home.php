@@ -65,15 +65,15 @@ if (!$result) {
         </div>
 
 
-<div style="display: flex">
+<div style="display: flex; flex-wrap: wrap;">
     <div class="col-6">
-    <div class="visitFeedback">
+    <div class="visitFeedback" style="flex: 1 1 280px; min-width: 280px;">
         <h3 class="minionPro"> Visit Feedback </h3>
         <p>Write feedback from the Ngwana family to a volunteer.</p>
         <a href="volunteers.php" class="invisibleLink" style="color: black"><button class="whiteButton buttonText">Write feedback</button></a>
     </div>
 
-    <div class="careRequests">
+    <div class="careRequests" style="flex: 1 1 280px; min-width: 280px;">
         <div style="display: flex">
             <h4 class="h4Bold"> Active care requests </h4>
             <a href="homeSupplies.php" class="invisibleLink marginLeftSmall" style="width: 240px"><button class="tertiaryButton buttonText">Create a request &#10140;</button></a>

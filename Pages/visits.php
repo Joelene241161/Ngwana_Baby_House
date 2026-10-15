@@ -49,7 +49,7 @@
                 <p class="pLight marginBottom0">10:00am-11:00am </p>
                 <p class="linkTextBlue">Cuddle therapy </p>
             </div>
-            <div style="display: flex; gap: 10px; margin-left: auto;" class="marginTopMedium">
+            <div style="display: flex; gap: 10px; margin-left: auto;flex-wrap: wrap;" class="marginTopMedium">
                 <div> <button class="secondaryButton secondaryGhost buttonText secondaryButtonWidth">Cancel</button></div>
                 <div> <button class="secondaryButton buttonText secondaryButtonWidth">Check in</button></div>
         </div>
@@ -60,8 +60,8 @@
     </div>
 
 
-<div style="display: flex; gap: 20px">
-    <div class="feedbackVolunteer col-7">
+<div style="display: flex; gap: 20px;flex-wrap: wrap;">
+    <div class="feedbackVolunteer col-7" style="flex: 1 1 280px; min-width: 280px;">
         <h4 class="minionPro">Visit feedback</h4>
         <h5 class="paddingBottomTiny">Feedback from your Ngwana family</h5>
 
@@ -79,7 +79,7 @@
 
     </div>
 
-    <div class="careHistory col-4">
+    <div class="careHistory col-4" style="flex: 1 1 280px; min-width: 280px;">
         <h3>Your care history</h3>
 
         <div class="hoursContainer">

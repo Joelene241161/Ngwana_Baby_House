@@ -45,15 +45,15 @@ include "../Components/manageSchedule.php";
     <div class="main">
         <h3 class="minionPro paddingTopMedium">Manage volunteer bookings</h3>
 
-        <div style="display: flex; gap: 40px">
+        <div style="display: flex; gap: 40px;flex-wrap: wrap;"">
             <!-- Left: Schedule controls panel -->
             <div class="col-5">
-                <div class="calendar-container">
+                <div class="calendar-container" style="flex: 1 1 280px; min-width: 280px;">
                     <label for="event-date"><h4>Select a date</h4></label>
                     <input type="date" id="event-date" class="marginTopTiny" value="<?php echo $selectedDate; ?>" onchange="location.href='?date='+this.value+'&slot=<?php echo $activeSlotTable; ?>'">
                 </div>
 
-                <div class="scheduleControls">
+                <div class="scheduleControls" style="flex: 1 1 280px; min-width: 280px;">
                     <h4 class="paddingBottomTiny">Schedule Controls</h4>
                     <h6 class="pLight">Manage bookings for the selected time block</h6>
 
@@ -96,7 +96,7 @@ include "../Components/manageSchedule.php";
             </div>
 
             <!-- Right: Time slots table -->
-            <div class="timeSlotsContainer col-6" style="margin-bottom: 40px">
+            <div class="timeSlotsContainer col-6" style="margin-bottom: 40px; flex: 1 1 280px; min-width: 280px;"">
                 <div style="display: flex; gap: 20%;">
                     <div><h4><?php echo date('l, F j', strtotime($selectedDate)); ?></h4></div>
                     <div>

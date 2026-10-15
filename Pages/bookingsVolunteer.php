@@ -51,17 +51,17 @@ include "../Components/volunteerBookingLogic.php";
     <?php endif; ?>
 
     <form method="POST" action="bookingsVolunteer.php?date=<?php echo $selectedDate; ?>">
-        <div style="display: flex; gap: 40px">
+        <div style="display: flex; gap: 40px;flex-wrap: wrap;">
             <div class="col-5">
                 <h3 class="minionPro marginTopLarge">Book a session</h3>
                 <h4>Select your visitation slot</h4>
 
-                <div class="calendar-container">
+                <div class="calendar-container" style="flex: 1 1 280px; min-width: 280px;">
                     <label for="event-date"><h4>Select a date</h4></label>
                     <input type="date" id="event-date" name="date" class="marginTopTiny" value="<?php echo $selectedDate; ?>" onchange="location.href='bookingsVolunteer.php?date='+this.value">
                 </div>
 
-                <div class="scheduleControls">
+                <div class="scheduleControls" style="flex: 1 1 280px; min-width: 280px;">
                     <h4>Care board</h4>
                     <h5>I’d love to help with...</h5>
 
@@ -99,7 +99,7 @@ include "../Components/volunteerBookingLogic.php";
 
             <!-- day time slots -->
             <div class="col-6">
-                <div class="timeContainer">
+                <div class="timeContainer" style="flex: 1 1 280px; min-width: 280px;">
                     <h4>Select an available time</h4>
 
                     <div class="time-group marginTop15">
@@ -128,19 +128,19 @@ include "../Components/volunteerBookingLogic.php";
                     </div>
                 </div>
 
-                <div class="volunteerSupplyNeeds">
+                <div class="volunteerSupplyNeeds" style="flex: 1 1 280px; min-width: 280px;">
                     <h4>View supply needs</h4>
                     <p class="pLight">If you want to go the extra mile; you can bring supplies with you on your next visit, but remember that your time and love is more than enough.</p>
-                    <div style="display: flex; gap: 20px">
-                        <div><img src="../Assets/diaper.png" alt="diapers" style="width: 60px"></div>
-                        <div><img src="../Assets/wipes.png" alt="wet wipes" style="height: 60px"></div>
-                        <div><img src="../Assets/toys.png" alt="toys" style="width: 60px"></div>
-                        <div><img src="../Assets/formula.png" alt="formula" style="width: 60px"></div>
+                    <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+                        <div><img src="../Assets/diaper.png" alt="diapers" style="width: 30px"></div>
+                        <div><img src="../Assets/wipes.png" alt="wet wipes" style="height: 30px"></div>
+                        <div><img src="../Assets/toys.png" alt="toys" style="width: 30px"></div>
+                        <div><img src="../Assets/formula.png" alt="formula" style="width: 30px"></div>
                         <button type="button" class="secondaryButton buttonText" style="height: fit-content">View supply list</button>
                     </div>
                 </div>
 
-                <div class="confirmBooking">
+                <div class="confirmBooking" style="flex: 1 1 280px; min-width: 280px;">
                     <h3 class="minionPro" style="font-size: 35px">Almost there!</h3>
                     <span class="blueBgText">Check everything looks right before confirming your visit.</span>
                     <h5 class="marginTopMedium">Personal details: <?php echo htmlspecialchars($userName); ?></h5>

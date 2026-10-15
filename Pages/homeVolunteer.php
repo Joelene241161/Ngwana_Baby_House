@@ -45,22 +45,26 @@
         </div>
 
 
-<div style="display: flex; gap: 20px">
-    <div class="col-4 chooseDate">
+<div style="display: flex; flex-wrap: wrap; gap: 20px;">
+    
+    <!-- Card 1 -->
+    <div class="chooseDate" style="flex: 1 1 280px; min-width: 280px;">
         <div class="circle-number">1</div>
         <h3 class="marginTopLarge"> Select a time </h3>
         <p>Pick a volunteering date that works for you.</p>
         <button class="secondaryButton secondaryGhost buttonText"><a href="bookingsVolunteer.php" class="linkTextYellow">View dates</a></button>
     </div>
 
-    <div class="col-4 chooseDate chooseDateBlue">
+    <!-- Card 2 -->
+    <div class="chooseDate chooseDateBlue" style="flex: 1 1 280px; min-width: 280px;">
         <div class="circle-number circle-number-blue">2</div>
         <h3 class="marginTopLarge"> Select a time </h3>
         <p>Choose an available time slot.</p>
         <button class="tertiaryButton tertiaryGhost buttonText"><a href="bookingsVolunteer.php" class="linkTextBlue">Review time slots</a></button>
     </div>
 
-    <div class="col-4 chooseDate chooseDateRed">
+    <!-- Card 3 -->
+    <div class="chooseDate chooseDateRed" style="flex: 1 1 280px; min-width: 280px;">
         <div class="circle-number circle-number-Red">3</div>
         <h3 class="marginTopLarge"> Confirm your visit </h3>
         <p>Contribute with your love and time.</p>

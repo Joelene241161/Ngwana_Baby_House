@@ -73,7 +73,7 @@ $conn->close();
      <h3 class="minionPro paddingTopMedium"> Reporting hub </h3>
 
     <!-- table start -->
-    <div class="recentActivityContainer">
+    <div class="recentActivityContainer" style="flex: 1 1 280px; min-width: 280px;">
         <h4>Recent volunteer activity</h4>
         <p class="pLight">Latest activity logged by volunteers</p>
         <table class="tablePadding">
@@ -120,9 +120,9 @@ $conn->close();
 </table>
     </div> <!-- table end -->
 
-<div style="display: flex; gap: 40px">
+<div style="display: flex; gap: 40px;flex-wrap: wrap;">
     <!-- graph -->
-    <div class="hoursGraphContainer col-4">
+    <div class="hoursGraphContainer col-4" style="flex: 1 1 280px; min-width: 200px;">
         <h4 class="paddingBottomTiny">Volunteer hours counted</h4>
         <div class="hoursCounter">
             <h3 class="marginBottom0">142 hrs</h3>
@@ -131,7 +131,7 @@ $conn->close();
         <?php include "../Components/graph.php";?>
     </div>
 
-<div class="col-6 materialsSourced">
+<div class="col-6 materialsSourced" style="flex: 1 1 280px; min-width: 280px;">
     <h4>Donated items</h4>
     <p class="pLight marginBottom0">Automatically updated </p>
 

@@ -43,7 +43,7 @@
      <p class="pLight">Manage who can access the internal Ngwana Huis staff dashboard.</p>
 
 <!-- start of flex container -->
-    <div style="display: flex; gap: 40px">
+    <div style="display: flex; gap: 40px;flex-wrap: wrap;">
     <!-- table start -->
     <div class="recentActivityContainer staffTable">
         <h4>Recent Sign Up’s</h4>

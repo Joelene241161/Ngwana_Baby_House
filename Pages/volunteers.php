@@ -42,7 +42,7 @@
     <h3 class="minionPro paddingTopMedium"> Today’s volunteer schedule  </h3>
 
 
-<div style="display: flex">
+<div style="display: flex; flex-wrap: wrap;">
 
 <div class="col-6">
 <!-- One volunteer -->
