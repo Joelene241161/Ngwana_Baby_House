@@ -52,7 +52,15 @@ $result =$conn->query("SELECT * FROM supplyrequest WHERE received = 0 ORDER BY c
 
 <body class="background">
 
-    <!-- <?php include "../Components/sidebar.php";?> -->
+    <!-- Desktop sidebar -->
+    <div class="d-none d-md-block">
+        <?php include "../Components/sidebar.php";?>
+    </div>
+
+    <!-- Mobile navbar -->
+    <div class="d-block d-md-none">
+        <?php include "../Components/mobileNav.php";?>
+    </div>
 
     <div class="main">
 
@@ -68,7 +76,7 @@ $result =$conn->query("SELECT * FROM supplyrequest WHERE received = 0 ORDER BY c
             <h3 class="minionPro"> Create care requests to inform volunteers </h3>
 
 
-<div style="display: flex">
+<div style="display: flex; flex-wrap: wrap;">
     <div class="col-4">
     <div class="selectRequests">
         <h4> Select a category </h4>
@@ -106,7 +114,7 @@ $result =$conn->query("SELECT * FROM supplyrequest WHERE received = 0 ORDER BY c
     </div>
 </div>
 
-<div class="supplyRequests col-8">
+<div class="supplyRequests col-7">
     <h4 class="h4Bold"> Active care requests </h4>
     <div>
         

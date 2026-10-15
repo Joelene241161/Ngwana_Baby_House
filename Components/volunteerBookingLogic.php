@@ -120,5 +120,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['book_visit'])) {
 if (isset($_GET['success'])) {
     $successMessage = 'Visit scheduled successfully!';
 }
-$conn->close();
+
 ?>

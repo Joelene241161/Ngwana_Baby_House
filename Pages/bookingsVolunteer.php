@@ -1,6 +1,16 @@
 <?php
 // logic file
 include "../Components/volunteerBookingLogic.php";
+
+require_once '../config.php';
+
+$supplyRequests = [];
+if (isset($conn) && $conn instanceof mysqli && $conn->ping()) {
+    $res = $conn->query("SELECT * FROM supplyrequest WHERE received = 0 ORDER BY created_at DESC");
+    if ($res) {
+        $supplyRequests = $res->fetch_all(MYSQLI_ASSOC);
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -136,7 +146,7 @@ include "../Components/volunteerBookingLogic.php";
                         <div><img src="../Assets/wipes.png" alt="wet wipes" style="height: 30px"></div>
                         <div><img src="../Assets/toys.png" alt="toys" style="width: 30px"></div>
                         <div><img src="../Assets/formula.png" alt="formula" style="width: 30px"></div>
-                        <button type="button" class="secondaryButton buttonText" style="height: fit-content">View supply list</button>
+                        <button type="button" class="secondaryButton buttonText" style="height: fit-content" data-bs-toggle="modal" data-bs-target="#supplyNeedsModal">View supply list</button>
                     </div>
                 </div>
 
@@ -158,6 +168,8 @@ include "../Components/volunteerBookingLogic.php";
 </div> <!-- main -->
 
 <div style="margin-bottom: 75px"></div>
+
+ <?php include "../Components/supplyNeedsModal.php";?>
 
     <!-- Quantity selector -->
  <script>
