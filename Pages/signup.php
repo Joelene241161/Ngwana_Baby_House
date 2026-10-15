@@ -21,7 +21,7 @@
 
 <link rel="stylesheet" href="../main.css">
 
-</head>   
+</head>  
 
 <body class="background">
 <section class="backgroundImageSignup">
@@ -29,41 +29,48 @@
 <?php
 require_once '../config.php';
 
+$errors = [];
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = trim($_POST['username']);
     $email    = trim($_POST['email']);
     $password = $_POST['password_hash'];
+    $role     = 'volunteer'; 
 
-    $errors = [];
     if (empty($username)) $errors[] = "Your name is required";
     if (empty($email)) $errors[] = "Email is required";
     if (strlen($password) < 6) $errors[] = "Password must be at least 6 characters";
 
     if (empty($errors)) {
         $password_hash = password_hash($password, PASSWORD_DEFAULT);
-        $tokens = 0;
 
-        $stmt = $conn->prepare("INSERT INTO users (username, email, password_hash) VALUES (?, ?, ?)");
-        $stmt->bind_param("sss", $username, $email, $password_hash);
+        $stmt = $conn->prepare("INSERT INTO users (username, email, password_hash, role) VALUES (?, ?, ?, ?)");
+        $stmt->bind_param("ssss", $username, $email, $password_hash, $role);
 
         if ($stmt->execute()) {
+            // log the user in after they signed up
+            $_SESSION['user_id'] = $stmt->insert_id;
+            $_SESSION['email'] = $email;
+            $_SESSION['role'] = $role;
             $_SESSION['success'] = "Registration successful! Welcome aboard.";
-            header("Location: home.php");
+
+            // Redirect to the volunteer home page
+            header("Location: homeVolunteer.php");
             exit();
-        }
         } else {
-            if (strpos($stmt->error, 'Duplicate') !== false) {
+            if ($conn->errno == 1062 || strpos($stmt->error, 'Duplicate') !== false) {
                 $errors[] = "Username or email already exists";
             } else {
                 $errors[] = "Registration failed: " . $stmt->error;
             }
         }
     }
+}
 ?>
 
     <?php if (!empty($errors)): ?>
             <div class="error">
-                <?php foreach ($errors as $err) echo "• " . htmlspecialchars($err) . "<br>"; ?>
+                <?php foreach ($errors as $err) echo htmlspecialchars($err) . "<br>"; ?>
             </div>
         <?php endif; ?>
 
@@ -77,24 +84,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         <form class="formSignUp" method="POST" action="" enctype="multipart/form-data">
         
+        <label for="username">Your name:</label><br>
+        <input type="text" id="username" name="username" placeholder="First and last name" required value=""><br>
+
         <label for="email">Email:</label><br>
-        <input type="email" id="email" name="email" placeholder="Email address" required="" value=""><br>
+        <input type="email" id="email" name="email" placeholder="Email address" required value=""><br>
 
         <label for="password_hash" class="spaceBetween">Password:</label><br>
-        <input type="password" id="password_hash" name="password_hash" required="">
-        <br>
-
-        <label for="username" name="username" class="spaceBetween">Your name:</label><br>
-        <input type="text" id="username" name="username" placeholder="First and last name" required="" value=""><br>
+        <input type="password" id="password_hash" name="password_hash" required><br>
 
         <input type="submit" class="primaryButton buttonText landingButton" value="Create Account" name="Submit">
         </form>
 
-        <p class="landingButton">I already have an account<a href="login.php" class="linkText">LOG IN</a></p>
+        <p class="landingButton">I already have an account <a href="login.php" class="linkText">LOG IN</a></p>
 
     </div>
 </section>
-
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
     <script src="script.js"></script>

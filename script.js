@@ -1,5 +1,5 @@
 window.addEventListener("load", () => {
 setTimeout(() => {
-window.location.href = "Pages/home.php";
+window.location.href = "Pages/landingPage.php";
 }, 1900);
 });

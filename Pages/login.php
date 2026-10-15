@@ -21,7 +21,7 @@
 
 <link rel="stylesheet" href="../main.css">
 
-</head>   
+</head>  
 
 <body class="background">
 <section class="backgroundImageSignup">
@@ -33,9 +33,13 @@
     <?php
     require_once '../config.php';
 
-    // If already logged in, go to home
-    if (isset($_SESSION['userID'])) {
-        header("Location: home.php");
+    // If they have logged in before, check their role and redirect accordingly
+    if (isset($_SESSION['user_id'])) {
+        if (isset($_SESSION['role']) && $_SESSION['role'] === 'volunteer') {
+            header("Location: homeVolunteer.php");
+        } else {
+            header("Location: home.php");
+        }
         exit();
     }
 
@@ -44,19 +48,26 @@
         $email = trim($_POST['email']);
         $password = $_POST['password_hash'];
         
-        // Look up user by username
-        $stmt = $conn->prepare("SELECT user_id, email, password_hash FROM users WHERE email = ?");
-        $stmt->bind_param("s", $email,);
+        $stmt = $conn->prepare("SELECT user_id, email, password_hash, role FROM users WHERE email = ?");
+        $stmt->bind_param("s", $email);
         $stmt->execute();
         $result = $stmt->get_result();
         
         if ($user = $result->fetch_assoc()) {
-            // Verify password
+            // verify password
             if (password_verify($password, $user['password_hash'])) {
-                // Password matches — log them in
+
                 $_SESSION['user_id'] = $user['user_id'];
                 $_SESSION['email'] = $user['email'];
-                header("Location: home.php");
+                $_SESSION['role'] = $user['role']; // store role in session
+
+                // redirect based on role
+                if ($user['role'] === 'volunteer') {
+                    header("Location: homeVolunteer.php");
+                } else {
+                    // default fallback
+                    header("Location: home.php");
+                }
                 exit();
             } else {
                 $error = "Invalid email or password";

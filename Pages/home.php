@@ -38,7 +38,6 @@ if (!$result) {
 <body class="background">
 
     <!-- <?php include "../Components/sidebar.php";?> -->
-     <?php include "../Components/disclaimerModal.php";?>
 
     <div class="main">
 

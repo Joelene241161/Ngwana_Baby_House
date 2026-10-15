@@ -39,6 +39,8 @@ Create an account to schedule a visit.<h4>
 <button class="primaryButton buttonText landingButton">I already have an account</button>
 </a>
 
+ <?php include "../Components/disclaimerModal.php";?>
+
 </section>
 
 

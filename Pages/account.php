@@ -137,7 +137,10 @@ $stmt->close();$conn->close();
 
         <div style="display: flex; gap: 10px; margin-bottom: 20px">
             <div>
-            <button class="secondaryButton buttonText">Log out</button></div>
+            <form action="../Components/logout.php" method="POST">
+            <button type="submit" class="secondaryButton buttonText">Log out</button>
+        </form>
+    </div>
             <div>
             <button class="primaryButton buttonText">Delete account</button></div>
         </div>
