@@ -167,9 +167,11 @@ $stmt->close();$conn->close();
             <button type="submit" class="secondaryButton buttonText">Log out</button>
         </form>
     </div>
-            <div>
-            <button class="primaryButton buttonText">Delete account</button></div>
-        </div>
+        <div>
+    <form action="../Components/deleteAccount.php" method="POST" onsubmit="return confirm('Are you sure you want to delete your account? This action cannot be undone.');">
+        <button type="submit" class="primaryButton buttonText">Delete account</button>
+    </form>
+</div>
 
     </div> 
 
