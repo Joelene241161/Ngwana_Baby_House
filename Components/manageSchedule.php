@@ -1,8 +1,13 @@
 <?php
 require_once '../config.php';
 
-// Selected date (default to today or GET parameter)
-$selectedDate = $_GET['date'] ?? date('Y-m-d');
+// Selected date
+$selectedDate = date('Y-m-d');
+if (isset($_GET['date']) && !empty($_GET['date'])) {
+    $selectedDate = $_GET['date'];
+} elseif (isset($_POST['selected_date']) && !empty($_POST['selected_date'])) {
+    $selectedDate = $_POST['selected_date'];
+}
 
 // Check if an entry exists for this date, otherwise create it
 $stmt = $conn->prepare("SELECT day_id FROM scheduledday WHERE DATE(date_at) = ?");
@@ -86,7 +91,7 @@ $activeQuery->execute();
 $activeData = $activeQuery->get_result()->fetch_assoc();
 $activeQuery->close();
 
-// Gather all slots data for; table rendering and daily capacity summary
+// Gather all slots data for table rendering and daily capacity summary
 $allSlotsData = [];
 $totalDailyCapacity = 0;
 $totalDailyCurrent = 0;
@@ -121,5 +126,5 @@ foreach ($slotTables as $table => $label) {
         $totalDailyCurrent += $data['capacity'];
     }
 }
-$conn->close();
+
 ?>

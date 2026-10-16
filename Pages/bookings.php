@@ -62,7 +62,8 @@ include "../Components/manageSchedule.php";
                     </div>
 
                     <form method="POST" action="bookings.php?date=<?php echo $selectedDate; ?>&slot=<?php echo $activeSlotTable; ?>">
-                        <input type="hidden" name="action_slot" value="<?php echo $activeSlotTable; ?>">
+                    <input type="hidden" name="action_slot" value="<?php echo $activeSlotTable; ?>">
+                    <input type="hidden" name="selected_date" value="<?php echo $selectedDate; ?>">
                         
                         <div style="display: flex">
                             <div class="marginRightTiny">
