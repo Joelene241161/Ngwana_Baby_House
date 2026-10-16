@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <title>Chart.js Donut Chart</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
 </head>
 <body>
 
@@ -15,12 +14,21 @@
 <script>
     const ctx = document.getElementById('myDonutChart').getContext('2d');
     
+    // dataset values
+    const chartData = [
+        <?php echo isset($taskHoursMap['cuddle']) ? $taskHoursMap['cuddle'] : 0; ?>,
+        <?php echo isset($taskHoursMap['tummy']) ? $taskHoursMap['tummy'] : 0; ?>,
+        <?php echo isset($taskHoursMap['feed']) ? $taskHoursMap['feed'] : 0; ?>,
+        <?php echo isset($taskHoursMap['play']) ? $taskHoursMap['play'] : 0; ?>,
+        <?php echo isset($taskHoursMap['reading']) ? $taskHoursMap['reading'] : 0; ?>
+    ];
+
     const myDonutChart = new Chart(ctx, {
         type: 'doughnut',
         data: {
-            labels: ['Cuddle Therapy', 'Tummy time', 'Feeding', 'Play', 'Reading'], // task categories
+            labels: ['Cuddle Therapy', 'Tummy time', 'Feeding support', 'Play time', 'Reading & stories'],
             datasets: [{
-                data: [40, 20, 15, 15, 10], // Corresponding hours
+                data: chartData,
                 backgroundColor: [
                     '#F26A21',
                     '#F7B731',
