@@ -99,6 +99,10 @@
         <input type="password" id="password_hash" name="password_hash" required="">
         <br>
 
+        <div class="paddingTopTiny">
+            <a href="forgotPassword.php" class="linkText" style="font-size: 14px;">Forgot password?</a>
+        </div>
+
         <input type="submit" class="primaryButton buttonText landingButton" value="Log in" name="Submit">
         </form>
 
