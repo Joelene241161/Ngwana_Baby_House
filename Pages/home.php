@@ -6,6 +6,34 @@ $result = $conn->query("SELECT * FROM supplyrequest WHERE received = 0 ORDER BY 
 if (!$result) {
     die("SQL Error: " . $conn->error);
 }
+
+// Fetch the next upcoming booking for today (closest to current time)
+$upcomingQuery = "SELECT b.*, u.username 
+                  FROM bookings b 
+                  JOIN users u ON b.user_id = u.user_id 
+                  WHERE DATE(b.createdFor) = CURDATE() 
+                  AND b.createdFor >= NOW() 
+                  ORDER BY b.createdFor ASC 
+                  LIMIT 1";
+
+$upcomingResult = $conn->query($upcomingQuery);
+$upcomingBooking = null;
+
+if ($upcomingResult && $upcomingResult->num_rows > 0) {
+    $upcomingBooking = $upcomingResult->fetch_assoc();
+} else {
+    // fallback: If all of today's bookings started earlier, show the most recent one still expected/arrived today
+    $fallbackQuery = "SELECT b.*, u.username 
+                      FROM bookings b 
+                      JOIN users u ON b.user_id = u.user_id 
+                      WHERE DATE(b.createdFor) = CURDATE() 
+                      ORDER BY b.createdFor DESC 
+                      LIMIT 1";
+    $fallbackResult = $conn->query($fallbackQuery);
+    if ($fallbackResult && $fallbackResult->num_rows > 0) {
+        $upcomingBooking = $fallbackResult->fetch_assoc();
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -126,12 +154,23 @@ if (!$result) {
 
     <div>
         <h6 class="visith6"> Today </h6>
+        <?php if ($upcomingBooking): ?>
+            <?php 
+                // badge class according to status
+                $statusClass = 'text-bg-light';
+                if ($upcomingBooking['status'] === 'arrived') $statusClass = 'badgeArrived';
+                elseif ($upcomingBooking['status'] === 'late') $statusClass = 'badgeLate';
+            ?>
             <div class="upcomingVisits">
-            <h3> Volunteer Name <span class="badge rounded-pill text-bg-light"><h6>Arrived</h6></span></h3>
-            <p>10 April, 10:00am-11:00am</p>
-            <a href="volunteers.php" class="invisibleLink"><button class="secondaryButton buttonText marginTopSmall">View visit details</button></a>
+                <h3> <?php echo htmlspecialchars($upcomingBooking['username']); ?> <span class="badge rounded-pill <?php echo $statusClass; ?>"><h6><?php echo ucfirst(htmlspecialchars($upcomingBooking['status'])); ?></h6></span></h3>
+                <p><?php echo date('d F, g:ia', strtotime($upcomingBooking['createdFor'])); ?></p>
+                <a href="volunteers.php?booking_id=<?php echo $upcomingBooking['booking_id']; ?>" class="invisibleLink"><button class="secondaryButton buttonText marginTopSmall">View visit details</button></a>
             </div>
-        
+        <?php else: ?>
+            <div class="upcomingVisits">
+                <p class="pLight" style="margin: 0;">No more bookings for today left.</p>
+            </div>
+        <?php endif; ?>
     </div>
 
 </div> <!-- flex container -->

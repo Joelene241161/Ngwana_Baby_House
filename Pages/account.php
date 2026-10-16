@@ -80,7 +80,7 @@ $stmt->close();$conn->close();
           <div class="profile-upload-row">
               <div class="profile-avatar-container">
                   <?php if (!empty($user['profilePicture']) &&$user['profilePicture'] !== 'default.jpg'): ?>
-                      <img src="../uploads/<?php echo htmlspecialchars($user['profilePicture']); ?>" alt="Profile picture" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover;">
+                      <img src="../uploads/<?php echo htmlspecialchars($user['profilePicture']); ?>" alt="Profile picture" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; image-rendering: -webkit-optimize-contrast;">
                   <?php else: ?>
                       <span class="avatar-placeholder">Photo</span>
                   <?php endif; ?>

@@ -1,9 +1,98 @@
+<?php
+require_once '../config.php';
+
+// Makes sure user is logged in
+if (!isset($_SESSION['user_id'])) {
+    header("Location: ../login.php");
+    exit();
+}
+
+$currentUserId = $_SESSION['user_id'];
+
+// Send a message to a volunteer
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['send_message'])) {
+    $recipientId = intval($_POST['recipient_id']);
+    $content = trim($_POST['content']);
+
+    if (!empty($content) && $recipientId > 0) {
+        $msgStmt = $conn->prepare("INSERT INTO message (recipient_id, sender_id, content) VALUES (?, ?, ?)");
+        $msgStmt->bind_param("iis", $recipientId, $currentUserId, $content);
+        $msgStmt->execute();
+        $msgStmt->close();
+    }
+    header("Location: " . $_SERVER['PHP_SELF'] . (isset($_GET['booking_id']) ? '?booking_id=' . intval($_GET['booking_id']) : ''));
+    exit();
+}
+
+// Status updates
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_booking_status'])) {
+    $bookingId = intval($_POST['booking_id']);
+    $action = $_POST['action']; // check in or out
+
+    if ($action === 'check_in') {
+        $upd = $conn->prepare("UPDATE bookings SET status = 'arrived', CheckIn_at = NOW() WHERE booking_id = ?");
+        $upd->bind_param("i", $bookingId);
+        $upd->execute();
+        $upd->close();
+    } elseif ($action === 'check_out') {
+        $upd = $conn->prepare("UPDATE bookings SET CheckOut_at = NOW() WHERE booking_id = ?");
+        $upd->bind_param("i", $bookingId);
+        $upd->execute();
+        $upd->close();
+    }
+    
+    header("Location: " . $_SERVER['PHP_SELF'] . '?booking_id=' . $bookingId);
+    exit();
+}
+
+// Fetch only today's bookings, joined with user details
+$bookingsQuery = "SELECT b.*, u.username, u.email, u.telephoneNumber, u.profilePicture 
+                  FROM bookings b 
+                  JOIN users u ON b.user_id = u.user_id 
+                  WHERE DATE(b.createdFor) = CURDATE() 
+                  ORDER BY b.createdFor ASC";
+$result = $conn->query($bookingsQuery);
+$bookings = [];
+if ($result) {
+    while ($row = $result->fetch_assoc()) {
+        $bookings[] = $row;
+    }
+}
+
+// selected booking for details view
+$selectedBooking = null;
+if (isset($_GET['booking_id'])) {
+    $bId = intval($_GET['booking_id']);
+    foreach ($bookings as $b) {
+        if ($b['booking_id'] === $bId) {
+            $selectedBooking = $b;
+            break;
+        }
+    }
+}
+// Default to the first booking if none are selected
+if (!$selectedBooking && !empty($bookings)) {
+    $selectedBooking = $bookings[0];
+}
+
+// maps task enum to display text
+function getTaskDisplayName($taskKey) {
+    $map = [
+        'cuddle'  => 'Cuddle therapy',
+        'tummy'   => 'Tummy time',
+        'feed'    => 'Feeding support',
+        'play'    => 'Play time',
+        'reading' => 'Reading & stories'
+    ];
+    return isset($map[$taskKey]) ? $map[$taskKey] : ucfirst($taskKey);
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE-edge">
-    <meta name="viewport" content="width-device-width, initial-scale-1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <meta name="author" content="Joelene du Toit 241161">
     <meta name="keywords" content="Ngwana Baby House NGO">
@@ -45,126 +134,106 @@
 <div style="display: flex; flex-wrap: wrap;">
 
 <div class="col-6">
-<!-- One volunteer -->
-<button style="display: flex" class="listedVolunteer">
-    <div>
-        <h4> Volunteer Name</h4>
-        <p>10 April, 10:00am-11:00am</p>
-    </div>
-    <div>
-        <span class="badge badgeStyling  badgeArrived rounded-pill text-bg-light"><h5>Arrived</h5></span>
-    </div>
-</button>
-
-<!-- One volunteer -->
-<button style="display: flex" class="listedVolunteer listedVolunteerInactive">
-    <div>
-        <h4> Volunteer Name</h4>
-        <p>10 April, 10:00am-11:00am</p>
-    </div>
-    <div>
-        <span class="badge badgeStyling badgeArrived rounded-pill"><h5>Arrived</h5></span>
-    </div>
-</button>
-
-<!-- One volunteer -->
-<button style="display: flex" class="listedVolunteer listedVolunteerInactive">
-    <div>
-        <h4> Volunteer Name</h4>
-        <p>10 April, 10:00am-11:00am</p>
-    </div>
-    <div>
-        <span class="badge badgeExpected badgeStyling rounded-pill"><h5>Expected</h5></span>
-    </div>
-</button>
-
-<!-- One volunteer -->
-<button style="display: flex" class="listedVolunteer listedVolunteerInactive">
-    <div>
-        <h4> Volunteer Name</h4>
-        <p>10 April, 10:00am-11:00am</p>
-    </div>
-    <div>
-        <span class="badge badgeLate badgeStyling rounded-pill"><h5>Late</h5></span>
-    </div>
-</button>
+    <?php if (empty($bookings)): ?>
+        <p class="pLight">No scheduled bookings for today.</p>
+    <?php else: ?>
+        <?php foreach ($bookings as $booking): 
+            $isActive = ($selectedBooking && $selectedBooking['booking_id'] === $booking['booking_id']);
+            $inactiveClass = $isActive ? '' : 'listedVolunteerInactive';
+            
+            // badge class based on status
+            $statusClass = 'badgeExpected';
+            if ($booking['status'] === 'arrived') $statusClass = 'badgeArrived';
+            elseif ($booking['status'] === 'late') $statusClass = 'badgeLate';
+        ?>
+            <!-- One volunteer -->
+            <a href="?booking_id=<?php echo $booking['booking_id']; ?>" style="display: flex; text-decoration: none; color: inherit;" class="listedVolunteer <?php echo $inactiveClass; ?>">
+                <div>
+                    <h4><?php echo htmlspecialchars($booking['username']); ?></h4>
+                    <p><?php echo date('d F, g:ia', strtotime($booking['createdFor'])); ?></p>
+                </div>
+                <div>
+                    <span class="badge badgeStyling <?php echo $statusClass; ?> rounded-pill"><h5><?php echo ucfirst($booking['status']); ?></h5></span>
+                </div>
+            </a>
+        <?php endforeach; ?>
+    <?php endif; ?>
 
  </div> <!-- end volunteers list -->
 
  <!-- selected volunteers details -->
     <div class="volunteerDetails col-5">
-        <h4>Volunteer name</h4>
-        <p>10 April, 10:00am-11:00am</p>
-        <h5>Donations: <p class="marginTopTiny">Nappies size 2</p><h5>
+        <h4><?php echo $selectedBooking ? htmlspecialchars($selectedBooking['username']) : 'Select a volunteer'; ?></h4>
+        <p><?php echo $selectedBooking ? date('d F, g:ia', strtotime($selectedBooking['createdFor'])) : '-'; ?></p>
 
         <h5 class="marginTopMedium">Selected Cares:</h5>
 
-        <div style="display: flex">
-            <div class="SelectedCares">
-                <h6>Feeding</h6>
-            </div>
-            <div class="SelectedCares">
-                <h6>Cuddle therapy</h6>
-            </div>
+        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <?php if ($selectedBooking): ?>
+                <div class="SelectedCares">
+                    <h6><?php echo htmlspecialchars(getTaskDisplayName($selectedBooking['task'])); ?></h6>
+                </div>
+            <?php else: ?>
+                <p class="pLight">No task selected.</p>
+            <?php endif; ?>
         </div>
 
-        <h5 class="marginTopMedium">Contact: <p class="marginTopTiny">000 000 0000</p><h5>
+        <h5 class="marginTopMedium">Contact: <p class="marginTopTiny"><?php echo $selectedBooking ? htmlspecialchars($selectedBooking['telephoneNumber']) : '000 000 0000'; ?></p><h5>
         
-    <div style="display: flex">
-        <div>
-        <textarea placeholder="Write a message to volunteer..."></textarea>
-        </div>
-        <div>
-        <button class="primaryButton buttonText sendButton">send</button>
-        </div>
-    </div>
+        <form action="" method="POST">
+            <input type="hidden" name="send_message" value="1">
+            <input type="hidden" name="recipient_id" value="<?php echo $selectedBooking ? $selectedBooking['user_id'] : ''; ?>">
+            <div style="display: flex;">
+                <div>
+                    <textarea name="content" placeholder="Write a message to volunteer..." required></textarea>
+                </div>
+                <div>
+                    <button type="submit" class="primaryButton buttonText sendButton">send</button>
+                </div>
+            </div>
+        </form>
 
     </div>
 
 </div> <!-- flex container end -->
 
-<div style="display: flex">
+<div style="display: flex; gap: 20px; flex-wrap: wrap;" class="marginTopMedium">
     
+    <?php if ($selectedBooking): ?>
     <div class="col-4 volunteerStatus">
         <h4 class="minionProMedium"> Volunteer Status </h4>
         <p class="pLight">Update status of volunteer</p>
-        <h5>Volunteer name</h5>
+        <h5><?php echo htmlspecialchars($selectedBooking['username']); ?></h5>
 
-            <div style="display: flex" class="marginTopMedium">
+        <form action="" method="POST" class="marginTopMedium">
+            <input type="hidden" name="update_booking_status" value="1">
+            <input type="hidden" name="booking_id" value="<?php echo $selectedBooking['booking_id']; ?>">
+            
+            <div style="display: flex">
                 <div>
-                    <button class="secondaryButton buttonText marginRightTiny secondaryButtonWidth">Check in</button>
+                    <button type="submit" name="action" value="check_in" class="secondaryButton buttonText marginRightTiny secondaryButtonWidth">Check in</button>
                 </div>
                 <div>
-                    <button class="secondaryButton secondaryGhost buttonText secondaryButtonWidth">Check out</button>
-                </div>
-             </div><!--end of button group -->
-
-        <div class="timeStamp">
-            <h6>Time-stamped visit log</h6>
-            <p class="pLight">12:05 - checked in </p>
-        </div>
-     </div> <!-- End of one volunteer -->
-
-     <!-- Start of new volunteer -->
-      <div class="col-4 volunteerStatus">
-        <h4 class="minionProMedium"> Volunteer Status </h4>
-        <p class="pLight">Update status of volunteer</p>
-        <h5>Volunteer name</h5>
-
-            <div style="display: flex" class="marginTopMedium">
-                <div>
-                    <button class="secondaryButton buttonText marginRightTiny">Check in</button>
-                </div>
-                <div>
-                    <button class="secondaryButton secondaryGhost buttonText">Check out</button>
+                    <button type="submit" name="action" value="check_out" class="secondaryButton secondaryGhost buttonText secondaryButtonWidth">Check out</button>
                 </div>
              </div><!--end of button group -->
+        </form>
 
-        <div class="timeStamp">
+        <div class="timeStamp marginTopMedium">
             <h6>Time-stamped visit log</h6>
-            <p class="pLight">12:05 - checked in </p>
+            <p class="pLight">
+                <?php if (!empty($selectedBooking['CheckIn_at'])): ?>
+                    Checked in: <?php echo date('H:i', strtotime($selectedBooking['CheckIn_at'])); ?>
+                <?php else: ?>
+                    Not checked in yet
+                <?php endif; ?>
+                <?php if (!empty($selectedBooking['CheckOut_at']) && $selectedBooking['CheckOut_at'] !== $selectedBooking['CheckIn_at']): ?>
+                    <br>Checked out: <?php echo date('H:i', strtotime($selectedBooking['CheckOut_at'])); ?>
+                <?php endif; ?>
+            </p>
         </div>
-     </div> <!-- End of one volunteer -->
+     </div> <!-- end of one volunteer -->
+     <?php endif; ?>
 
 </div>
 
