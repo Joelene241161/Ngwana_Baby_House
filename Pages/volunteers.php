@@ -64,7 +64,7 @@ $selectedBooking = null;
 if (isset($_GET['booking_id'])) {
     $bId = intval($_GET['booking_id']);
     foreach ($bookings as $b) {
-        if ($b['booking_id'] === $bId) {
+        if ($b['booking_id'] == $bId) {
             $selectedBooking = $b;
             break;
         }
@@ -138,7 +138,7 @@ function getTaskDisplayName($taskKey) {
         <p class="pLight">No scheduled bookings for today.</p>
     <?php else: ?>
         <?php foreach ($bookings as $booking): 
-            $isActive = ($selectedBooking && $selectedBooking['booking_id'] === $booking['booking_id']);
+            $isActive = ($selectedBooking && $selectedBooking['booking_id'] == $booking['booking_id']);
             $inactiveClass = $isActive ? '' : 'listedVolunteerInactive';
             
             // badge class based on status
@@ -199,41 +199,45 @@ function getTaskDisplayName($taskKey) {
 
 <div style="display: flex; gap: 20px; flex-wrap: wrap;" class="marginTopMedium">
     
-    <?php if ($selectedBooking): ?>
-    <div class="col-4 volunteerStatus">
-        <h4 class="minionProMedium"> Volunteer Status </h4>
-        <p class="pLight">Update status of volunteer</p>
-        <h5><?php echo htmlspecialchars($selectedBooking['username']); ?></h5>
+    <?php if (empty($bookings)): ?>
+        <p class="pLight">No volunteer status cards to display.</p>
+    <?php else: ?>
+        <?php foreach ($bookings as $booking): ?>
+        <div class="col-4 volunteerStatus">
+            <h4 class="minionProMedium"> Volunteer Status </h4>
+            <p class="pLight">Update status of volunteer</p>
+            <h5><?php echo htmlspecialchars($booking['username']); ?></h5>
 
-        <form action="" method="POST" class="marginTopMedium">
-            <input type="hidden" name="update_booking_status" value="1">
-            <input type="hidden" name="booking_id" value="<?php echo $selectedBooking['booking_id']; ?>">
-            
-            <div style="display: flex">
-                <div>
-                    <button type="submit" name="action" value="check_in" class="secondaryButton buttonText marginRightTiny secondaryButtonWidth">Check in</button>
-                </div>
-                <div>
-                    <button type="submit" name="action" value="check_out" class="secondaryButton secondaryGhost buttonText secondaryButtonWidth">Check out</button>
-                </div>
-             </div><!--end of button group -->
-        </form>
+            <form action="" method="POST" class="marginTopMedium">
+                <input type="hidden" name="update_booking_status" value="1">
+                <input type="hidden" name="booking_id" value="<?php echo $booking['booking_id']; ?>">
+                
+                <div style="display: flex">
+                    <div>
+                        <button type="submit" name="action" value="check_in" class="secondaryButton buttonText marginRightTiny secondaryButtonWidth">Check in</button>
+                    </div>
+                    <div>
+                        <button type="submit" name="action" value="check_out" class="secondaryButton secondaryGhost buttonText secondaryButtonWidth">Check out</button>
+                    </div>
+                 </div><!--end of button group -->
+            </form>
 
-        <div class="timeStamp marginTopMedium">
-            <h6>Time-stamped visit log</h6>
-            <p class="pLight">
-                <?php if (!empty($selectedBooking['CheckIn_at'])): ?>
-                    Checked in: <?php echo date('H:i', strtotime($selectedBooking['CheckIn_at'])); ?>
-                <?php else: ?>
-                    Not checked in yet
-                <?php endif; ?>
-                <?php if (!empty($selectedBooking['CheckOut_at']) && $selectedBooking['CheckOut_at'] !== $selectedBooking['CheckIn_at']): ?>
-                    <br>Checked out: <?php echo date('H:i', strtotime($selectedBooking['CheckOut_at'])); ?>
-                <?php endif; ?>
-            </p>
-        </div>
-     </div> <!-- end of one volunteer -->
-     <?php endif; ?>
+            <div class="timeStamp marginTopMedium">
+                <h6>Time-stamped visit log</h6>
+                <p class="pLight">
+                    <?php if (!empty($booking['CheckIn_at'])): ?>
+                        Checked in: <?php echo date('H:i', strtotime($booking['CheckIn_at'])); ?>
+                    <?php else: ?>
+                        Not checked in yet
+                    <?php endif; ?>
+                    <?php if (!empty($booking['CheckOut_at']) && $booking['CheckOut_at'] !== $booking['CheckIn_at']): ?>
+                        <br>Checked out: <?php echo date('H:i', strtotime($booking['CheckOut_at'])); ?>
+                    <?php endif; ?>
+                </p>
+            </div>
+         </div> <!-- end of one volunteer -->
+         <?php endforeach; ?>
+    <?php endif; ?>
 
 </div>
 
