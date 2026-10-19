@@ -161,11 +161,20 @@ if ($upcomingResult && $upcomingResult->num_rows > 0) {
                 if ($upcomingBooking['status'] === 'arrived') $statusClass = 'badgeArrived';
                 elseif ($upcomingBooking['status'] === 'late') $statusClass = 'badgeLate';
             ?>
-            <div class="upcomingVisits">
-                <h3> <?php echo htmlspecialchars($upcomingBooking['username']); ?> <span class="badge rounded-pill <?php echo $statusClass; ?>"><h6><?php echo ucfirst(htmlspecialchars($upcomingBooking['status'])); ?></h6></span></h3>
-                <p><?php echo date('d F, g:ia', strtotime($upcomingBooking['createdFor'])); ?></p>
-                <a href="volunteers.php?booking_id=<?php echo $upcomingBooking['booking_id']; ?>" class="invisibleLink"><button class="secondaryButton buttonText marginTopSmall">View visit details</button></a>
-            </div>
+            <div class="upcomingVisits" style="flex: 1 1 280px; min-width: 280px;">
+    <h3> 
+        <?php 
+            $username = $upcomingBooking['username'];
+            $displayName = (mb_strlen($username) > 10) ? mb_substr($username, 0, 9) . '...' : $username;
+            echo htmlspecialchars($displayName); 
+        ?> 
+        <span class="badge rounded-pill <?php echo $statusClass; ?>">
+            <h6><?php echo ucfirst(htmlspecialchars($upcomingBooking['status'])); ?></h6>
+        </span>
+    </h3>
+    <p><?php echo date('d F, g:ia', strtotime($upcomingBooking['createdFor'])); ?></p>
+    <a href="volunteers.php?booking_id=<?php echo $upcomingBooking['booking_id']; ?>" class="invisibleLink"><button class="secondaryButton buttonText marginTopSmall">View visit details</button></a>
+</div>
         <?php else: ?>
             <div class="upcomingVisits">
                 <p class="pLight" style="margin: 0;">No more bookings for today left.</p>
