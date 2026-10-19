@@ -47,6 +47,7 @@ $stmt->close();
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <?php include '../Components/googleAnalytics.php'; ?>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Set New Password - Ngwana Baby House</title>
