@@ -16,7 +16,7 @@
           </div>
         </div>
 
-        <form method="post" action="/Ngwana_Baby_House/Components/processRequest.php">
+        <form method="post" action="processRequest.php">
           <!-- Dynamically populates (size for nappies, age for toys and stage for formula) -->
           <div id="extraSection"></div>
 
