@@ -13,8 +13,9 @@ include "../Components/manageSchedule.php";
 
     <meta name="author" content="Joelene du Toit 241161">
     <meta name="keywords" content="Ngwana Baby House NGO">
+    <meta property="og:description" content="Ngwana Baby House volunteer dashboard. Volunteers can see real-time needs and volunteer to help. Staff can manage their volunteers and get insights.">
     <title>
-        Ngwana Baby House
+        Bookings
     </title>
 
     <link rel="icon" type="image/x-icon" href="../Assets/favicon.ico">

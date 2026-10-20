@@ -20,11 +20,12 @@ if (isset($conn) && $conn instanceof mysqli && $conn->ping()) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE-edge">
     <meta name="viewport" content="width-device-width, initial-scale-1.0">
+    <meta property="og:description" content="Ngwana Baby House volunteer dashboard. Volunteers can see real-time needs and volunteer to help. Staff can manage their volunteers and get insights.">
 
     <meta name="author" content="Joelene du Toit 241161">
     <meta name="keywords" content="Ngwana Baby House NGO">
     <title>
-        Ngwana Baby House
+        Volunteer bookings
     </title>
 
     <link rel="icon" type="image/x-icon" href="../Assets/favicon.ico">
