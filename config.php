@@ -5,12 +5,12 @@ require_once __DIR__ . '/vendor/autoload.php';
 use Aws\Ssm\SsmClient;
 use Aws\Exception\AwsException;
 
-// environment variable
-$db_host = getenv('DB_HOST') ?: ($_ENV['DB_HOST'] ?? null);
-$db_user = getenv('DB_USER') ?: ($_ENV['DB_USER'] ?? null);
-$db_name = getenv('DB_NAME') ?: ($_ENV['DB_NAME'] ?? null);
-$db_port = getenv('DB_PORT') ?: ($_ENV['DB_PORT'] ?? 3306);
-$db_pass = getenv('DB_PASS') ?: ($_ENV['DB_PASS'] ?? null);
+// database details
+$db_host = 'volunteerhouse.c74ukksqond2.eu-north-1.rds.amazonaws.com';
+$db_user = 'adminGorilla';                                            
+$db_name = 'ngwana_baby_house';                                       
+$db_port = 3306;
+$db_pass = null;
 
 if (!$db_pass) {
     try {
