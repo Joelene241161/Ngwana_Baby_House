@@ -21,7 +21,7 @@ if (!$db_pass) {
 
         // Fetch parameters
         $result = $ssmClient->getParameter([
-            'Name'           => '/production/db/password',
+            'Name'           => 'DB_PASS',
             'WithDecryption' => true,
         ]);
 
