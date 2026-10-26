@@ -64,7 +64,7 @@ This web app is for an NGO, where volunteers can see real-time needs and volunte
 
 ## Design reference
 
-For this project, a UX design team completed the research and UX design. The design was then handed over to me to develop.
+For this project, a UX design team completed the research and UX design. The design was then handed over to me to develop. The 2nd year UX students were; Mmasape Manthata, Stefanie Laubscher, Minanté du Plessis, Ethan Naidoo and Lara van Jaarsveld. While the UX engineer was Coenraad Lindholm.
 
 ## Getting Started
 
