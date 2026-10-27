@@ -179,7 +179,7 @@ After deployment my supply request form did not work. Sending a supply request g
 <!-- MARKDOWN LINKS & IMAGES -->
 [image1]: ../Ngwana_Baby_House/Assets/readme/volunteerMockup.png
 [image2]: ../Ngwana_Baby_House/Assets/readme/ERD.png
-[image3]: ../Ngwana_Baby_House/Assets/readme/volunteerMockup.png
+[image3]: ../Ngwana_Baby_House/Assets/readme//Mockup%20volunteer.png
 [image4]: ../Ngwana_Baby_House/Assets/readme/Mockup%20account.png
 [image5]: ../Ngwana_Baby_House/Assets/readme/Mockup%20home.png
 [image6]: ../Ngwana_Baby_House/Assets/readme/Mockup%20reports.png
