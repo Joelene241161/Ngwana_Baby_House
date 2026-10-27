@@ -183,9 +183,9 @@ The second platform I used for deployment was AWS:
 ▫️After deployment my supply request form did not work. Sending a supply request gave a file not found error. Changing the file path fixed it. 
 
 <!-- MARKDOWN LINKS & IMAGES -->
-[image1]: ../Ngwana_Baby_House/Assets/readme/volunteerMockup.png
-[image2]: ../Ngwana_Baby_House/Assets/readme/ERD.png
-[image3]: ../Ngwana_Baby_House/Assets/readme//Mockup%20volunteer.png
-[image4]: ../Ngwana_Baby_House/Assets/readme/Mockup%20account.png
-[image5]: ../Ngwana_Baby_House/Assets/readme/Mockup%20home.png
-[image6]: ../Ngwana_Baby_House/Assets/readme/Mockup%20reports.png
+[image1]: Assets/readme/volunteerMockup.png
+[image2]: Assets/readme/ERD.png
+[image3]: Assets/readme//Mockup%20volunteer.png
+[image4]: Assets/readme/Mockup%20account.png
+[image5]: Assets/readme/Mockup%20home.png
+[image6]: Assets/readme/Mockup%20reports.png
